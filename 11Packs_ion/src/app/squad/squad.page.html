@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>squad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+ <ion-card class = "item item-checkbox  checkbox-positive"  *ngFor="let player of squad; let i = index">
+          <ion-card-content>
+            <div id="container" style="white-space:nowrap">
+              <div id="image" style="display:inline;">
+                  <img src="{{player.imageURL}}" style="width:10%;height:10%;">
+              </div>
+              <div id="texts" style="display:inline; white-space:nowrap;"> 
+                {{player.name}} {{player.credit}} Cr   {{player.playingTeamName}} 
+              </div>
+              <label class = "checkbox">
+                  <input type = "checkbox" (click)="onSelect(player, i)"/>
+               </label>
+          </div>​
+        </ion-card-content>
+    </ion-card>
+</ion-content>

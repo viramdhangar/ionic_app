@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Matches
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding >
+
+  <ion-card *ngFor="let match of matches">
+    <a routerLink="/leagues/{{match.unique_id}}">
+    <ion-card-header  style="color:hotpink">
+      {{match.team1Short}} vs {{match.team2Short}}
+    </ion-card-header>
+    <ion-card-content>
+      {{match.type}}
+    </ion-card-content>
+    <ion-card-content>
+      {{match.time}}
+    </ion-card-content>
+    </a>
+  </ion-card>
+
+</ion-content>

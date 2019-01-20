@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>leagues</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let league of leagues">
+      <ion-card-header  style="color:hotpink">
+          {{league.league}}  {{league.matchId}}
+        </ion-card-header>
+        <ion-card-content>
+          Winnin Amount : {{league.winningAmount}}
+        </ion-card-content>
+        <ion-card-content>
+          Size : {{league.size}}
+        </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<a routerLink="/squad/{{matchId}}">Create Team</a>
