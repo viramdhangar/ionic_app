@@ -1,5 +1,7 @@
 {
   "name": "11PacksIonic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
