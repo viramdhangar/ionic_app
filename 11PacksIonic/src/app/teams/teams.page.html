@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Teams</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let team of teams">
+    <ion-grid>
+      <ion-row>
+        <ion-col>{{team.teamName}}</ion-col>
+        <ion-col>
+          <ion-button routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.id}}">VIEW</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}">EDIT</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button>COPY</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button routerLink="/squad/{{matchId}}" style="background-color: white">Create Team</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -3,5 +3,11 @@
   "integrations": {
     "cordova": {}
   },
-  "type": "angular"
-}
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/*",
+      "proxyUrl": "https://11packs.cfapps.io"
+    }
+  ]
+} 

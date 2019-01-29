@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Team Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <h2>Wicket keeper</h2>
+  <ion-list *ngFor="let player of teamDetail">
+    <div *ngIf="player.playingRole == 'WK'">
+      <ion-label>{{player.name}}</ion-label>
+    </div>
+  </ion-list>
+
+  <h2>Batsman</h2>
+  <ion-list *ngFor="let player of teamDetail">
+    <div *ngIf="player.playingRole == 'BAT'">
+      <ion-label>{{player.name}}</ion-label>
+    </div>
+  </ion-list>
+
+  <h2>Bowler</h2>
+  <ion-list *ngFor="let player of teamDetail">
+    <div *ngIf="player.playingRole == 'BOWL'">
+      <ion-label>{{player.name}}</ion-label>
+    </div>
+  </ion-list>
+
+  <h2>Allrounder</h2>
+  <ion-list *ngFor="let player of teamDetail">
+    <div *ngIf="player.playingRole == 'ALL'">
+      <ion-label>{{player.name}}</ion-label>
+    </div>
+  </ion-list>
+
+</ion-content>

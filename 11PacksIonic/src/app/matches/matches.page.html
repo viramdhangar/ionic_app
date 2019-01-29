@@ -6,19 +6,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding >
+<ion-content padding>
 
   <ion-card *ngFor="let match of matches">
     <a routerLink="/leagues/{{match.unique_id}}">
-    <ion-card-header  style="color:hotpink">
-      {{match.team1Short}} vs {{match.team2Short}}
-    </ion-card-header>
-    <ion-card-content>
-      {{match.type}}
-    </ion-card-content>
-    <ion-card-content>
-      {{match.time}}
-    </ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col>
+            {{match.team1Short}} vs {{match.team2Short}}
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>{{match.team1Short}}</ion-col>
+          <ion-col>
+            {{match.type}}
+          </ion-col>
+          <ion-col>{{match.team2Short}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col>
+            {{match.time}}
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
     </a>
   </ion-card>
 

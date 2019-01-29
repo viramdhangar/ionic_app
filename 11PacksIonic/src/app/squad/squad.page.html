@@ -1,44 +1,74 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>squad</ion-title>
+    <ion-title>Select Players</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-segment [(ngModel)]="squads">
   <ion-segment-button value="WK">
-    <ion-label>WK</ion-label>
+    <ion-label>WK({{selectedWk.length}})</ion-label>
   </ion-segment-button>
   <ion-segment-button value="BAT">
-    <ion-label>BAT</ion-label>
+    <ion-label>BAT({{selectedBat.length}})</ion-label>
   </ion-segment-button>
   <ion-segment-button value="ALL">
-    <ion-label>ALL</ion-label>
+    <ion-label>ALL({{selectedAll.length}})</ion-label>
   </ion-segment-button>
   <ion-segment-button value="BOWL">
-    <ion-label>BOWL</ion-label>
+    <ion-label>BOWL({{selectedBowl.length}})</ion-label>
   </ion-segment-button>
 </ion-segment>
 
 <ion-content>
-    <div [ngSwitch]="squads">
-        <ng-container *ngFor="let player of squad; let i = index">
-          <div *ngSwitchCase="player.playingRole">
-              <ion-card class = "item item-checkbox  checkbox-positive">
-                  <ion-card-content>
-                    <div id="container" style="white-space:nowrap">
-                      <div id="image" style="display:inline;">
-                          <img src="{{player.imageURL}}" style="width:10%;height:10%;">
-                      </div>
-                      <div id="texts" style="display:inline; white-space:nowrap;"> 
-                        {{player.name}} {{player.credit}} Cr   {{player.playingTeamName}}  {{player.playingRole}} 
-                      </div>
-                      <label class = "checkbox">
-                          <input type = "checkbox" (click)="onSelect(player, i)"/>
-                       </label>
-                  </div>​
-                </ion-card-content>
-            </ion-card>
-          </div>
-        </ng-container>
+  <div [ngSwitch]="squads">
+    <ng-container *ngFor="let player of squad">
+      <div *ngSwitchCase="player.playingRole">
+        <ion-card class="item item-checkbox  checkbox-positive">
+          <div id="container" style="white-space:nowrap">
+            <div id="image" style="display:inline;">
+              <img src="{{player.imageURL}}" style="width:10%;height:10%;">
+            </div>
+          </div>​
+          <ion-grid>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col>
+                <div id="texts" style="display:inline; white-space:nowrap;">
+                  {{player.name}} {{player.credit}} Cr {{player.playingTeamName}} {{player.playingRole}}
+                </div>
+              </ion-col>
+              <ion-col>
+                <ion-checkbox (click)="onSelect(player)" [(ngModel)]="player.selected"></ion-checkbox>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
       </div>
+    </ng-container>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Players
+      </ion-col>
+      <ion-col>
+        Credits
+      </ion-col>
+      <ion-col style="display:inline;">
+        <ion-button (click)="onSubmit(squadSelected)">SAVE</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        {{ totalSelected }} / 11
+      </ion-col>
+      <ion-col>
+        {{ totalCreditUsed }}
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
