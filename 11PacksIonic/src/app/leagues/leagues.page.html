@@ -1,29 +1,120 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>leagues</ion-title>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/tabs/tabs/matches"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Leagues</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-card *ngFor="let league of leagues">
-    <ion-grid>
-      <ion-row>
-        <ion-col>{{league.league}}</ion-col>
-        <ion-col></ion-col>
-        <ion-col><ion-button>Join</ion-button></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>Size : {{league.joinedTeam}}/{{league.size}}</ion-col>
-        <ion-col>Buy In: {{league.entryFee}}</ion-col>
-        <ion-col>Pay Out : {{league.winningAmount}}</ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+<ion-segment [(ngModel)]="leaguess">
+  <ion-segment-button value="ALL">
+    <ion-label>NL</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label>H2H</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="3">
+    <ion-label>TRIPLE</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-content>
+  <div [ngSwitch]="leaguess" *ngFor="let league of leagues">
+    <ion-card style="border-radius: 30px;" *ngSwitchCase="league.status">
+      <ion-grid>
+        <ion-row>
+          <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
+          <ion-col
+            style="display: flex; font-size: 12px; justify-content: center; color:green; border-radius: 20px;">
+            <ion-row>
+              <ion-col style="font-size:medium">WIN:</ion-col>
+              <ion-col style="font-size:medium"><b>&#x20b9;{{league.winningAmount}}</b></ion-col> 
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
+          <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
+          <ion-col></ion-col>
+          <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOINED'">
+            <ion-button style="width: 60%;height: 80%;" color="secondary" routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">Joined
+            </ion-button>
+          </ion-col>
+          <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOIN'">
+            <ion-button expand="block" style="width: 60%;height: 80%;" color="secondary" routerLink="/teamlist/{{uniqueNumber}}/{{matchId}}/{{league.id}}/2">Join
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="display: flex; align-items: center; font-size: 12px; justify-content: left;">
+            <ion-row>
+              <ion-col>SIZE</ion-col>
+              <ion-col>{{league.joinedTeam}}/{{league.size}}</ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col
+            style="display: flex; font-size: 80%;  align-items: center; justify-content: center;  border-radius: 20px;">
+            <ion-row><b>ENTRY FEES &#x20b9; {{league.entryFee}}</b></ion-row> 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card style="border-radius: 30px;" *ngSwitchCase="league.size">
+        <ion-grid>
+          <ion-row>
+            <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
+            <ion-col
+              style="display: flex; font-size: 12px; justify-content: center; color:green; border-radius: 20px;">
+              <ion-row>
+                <ion-col style="font-size:medium">WIN:</ion-col>
+                <ion-col style="font-size:medium"><b>&#x20b9;{{league.winningAmount}}</b></ion-col> 
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
+            <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
+            <ion-col></ion-col>
+            <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOINED'">
+              <ion-button style="width: 60%;height: 80%;" color="secondary" routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">Joined
+              </ion-button>
+            </ion-col>
+            <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOIN'">
+              <ion-button expand="block" style="width: 60%;height: 80%;" color="secondary" routerLink="/teamlist/{{uniqueNumber}}/{{matchId}}/{{league.id}}/2">Join
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="display: flex; align-items: center; font-size: 12px; justify-content: left;">
+              <ion-row>
+                <ion-col>SIZE</ion-col>
+                <ion-col>{{league.joinedTeam}}/{{league.size}}</ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col
+              style="display: flex; font-size: 80%; color:white; align-items: center; justify-content: center; background:rgb(88, 165, 25); border-radius: 20px;">
+              <ion-row>ENTRY FEES &#x20b9; {{league.entryFee}}</ion-row> 
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+  </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button style="background-color: white" routerLink="/leagues/{{matchId}}">Leagues</ion-button>
-    <ion-button style="background-color: white" routerLink="/teamsOfMatch/8097547286/{{matchId}}" >My Teams</ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" routerLink="/leagues/{{uniqueNumber}}/{{matchId}}/JOINED">Joined Leagues
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" color="secondary" routerLink="/teamsOfMatch/{{uniqueNumber}}/{{matchId}}">My Teams
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
-<ion-footer>
+  <ion-footer>

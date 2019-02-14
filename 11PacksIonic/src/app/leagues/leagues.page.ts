@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LeaguesService } from '../service/leagues.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { Storage } from '@ionic/storage';
+import { LoadingController } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-leagues',
@@ -12,19 +13,73 @@ export class LeaguesPage implements OnInit {
 
   leagues : Array<any>;
   matchId : any;
+  joinedLeague: any;
+  leaguess: any;
+  matchStatus: any;
+  uniqueNumber:any;
+  user: any;
+  matchName: any;
 
-  constructor(private leaguesService: LeaguesService, private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    const matchId = +this.route.snapshot.paramMap.get('id');
-    this.ionViewDidLoad(matchId);
+  constructor(public loadingController: LoadingController, private storage: Storage, private leaguesService: LeaguesService, private route: ActivatedRoute) { 
+    this.leaguess = "ALL";
   }
 
-  ionViewDidLoad(matchId : any) {
+  ngOnInit() {
+    this.matchId = +this.route.snapshot.paramMap.get('id');
+    this.uniqueNumber = +this.route.snapshot.paramMap.get('uniqueNumber');
+    this.joinedLeague = this.route.snapshot.params['joinedLeague'];
+   // this.route.params.subscribe( params =>
+   //   this.matchName = params['matchName']
+   // )
+
+    this.getCurrentUser();
+    if(this.joinedLeague == "JOINED"){
+      this.getJoinedLeagues(this.uniqueNumber, this.matchId);
+    }else{
+      this.joinedLeague = "JOIN";
+      this.ionViewDidLoad(this.matchId);
+    }
+    /*this.route.params.subscribe( params =>
+        this.matchStatus = params['matchStatus']
+    )*/
+  }
+
+  async ionViewDidLoad(matchId : any) {
+    const loading = await this.loadingController.create({
+      message: 'Loading...'
+    });
+    await loading.present();
     this.leaguesService.getLeagues(matchId).subscribe(leagues => {
       this.matchId = matchId;
       this.leagues = leagues;
+      for(let league of this.leagues){
+        league.status = "ALL";
+      }
+      loading.dismiss();
     })
   }
 
+  async getJoinedLeagues(uniqueNumber: any, matchId: any) {
+    const loading = await this.loadingController.create({
+      message: 'Loading...'
+    });
+    await loading.present();
+    this.leaguesService.getJoinedLeagues(uniqueNumber, matchId).subscribe(leagues => {
+      this.matchId = matchId;
+      this.leagues = leagues;
+      for(let league of this.leagues){
+        league.status = "ALL";
+      }
+      console.log(this.leagues);
+      loading.dismiss();
+    })
+  }
+  getCurrentUser(){
+    this.storage.get("user").then(res => {
+      if(res){
+        this.user = res;
+        this.uniqueNumber = this.user.uniqueNumber;
+      }
+    })
+  }
 }

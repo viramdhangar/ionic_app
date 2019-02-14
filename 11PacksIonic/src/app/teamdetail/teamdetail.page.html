@@ -1,37 +1,64 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Team Detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="secondary">
+  <ion-grid>
+    <ion-row style="display: flex; justify-content: center">Wicket Keeper</ion-row>
+    <ion-row style="display: flex; justify-content: center">
+      <div *ngFor="let player of teamDetail">
+        <div *ngIf="player.playingRole == 'WK'">
+          <ion-col style="display: flex; justify-content: center">
+            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
+              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+            </div>
+          </ion-col>
+        </div>
+      </div>
+    </ion-row>
 
-  <h2>Wicket keeper</h2>
-  <ion-list *ngFor="let player of teamDetail">
-    <div *ngIf="player.playingRole == 'WK'">
-      <ion-label>{{player.name}}</ion-label>
-    </div>
-  </ion-list>
+    <ion-row style="display: flex; justify-content: center">Batsman</ion-row>
+    <ion-row style="display: flex; justify-content: center">
+      <div *ngFor="let player of teamDetail">
+        <div *ngIf="player.playingRole == 'BAT'">
+          <ion-col style="display: flex; justify-content: center">
+            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
+              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+            </div>
+          </ion-col>
+        </div>
+      </div>
+    </ion-row>
 
-  <h2>Batsman</h2>
-  <ion-list *ngFor="let player of teamDetail">
-    <div *ngIf="player.playingRole == 'BAT'">
-      <ion-label>{{player.name}}</ion-label>
-    </div>
-  </ion-list>
+    <ion-row style="display: flex; justify-content: center">All Rounder</ion-row>
+    <ion-row style="display: flex; justify-content: center">
+      <div *ngFor="let player of teamDetail">
+        <div *ngIf="player.playingRole == 'ALL'">
+          <ion-col style="display: flex; justify-content: center">
+            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
+              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+            </div>
+          </ion-col>
+        </div>
+      </div>
+    </ion-row>
 
-  <h2>Bowler</h2>
-  <ion-list *ngFor="let player of teamDetail">
-    <div *ngIf="player.playingRole == 'BOWL'">
-      <ion-label>{{player.name}}</ion-label>
-    </div>
-  </ion-list>
-
-  <h2>Allrounder</h2>
-  <ion-list *ngFor="let player of teamDetail">
-    <div *ngIf="player.playingRole == 'ALL'">
-      <ion-label>{{player.name}}</ion-label>
-    </div>
-  </ion-list>
-
+    <ion-row style="display: flex; justify-content: center">Bowler</ion-row>
+    <ion-row style="display: flex; justify-content: center">
+      <div *ngFor="let player of teamDetail">
+        <div *ngIf="player.playingRole == 'BOWL'">
+          <ion-col style="display: flex; justify-content: center">
+            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
+              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+            </div>
+          </ion-col>
+        </div>
+      </div>
+    </ion-row>
+  </ion-grid>
 </ion-content>

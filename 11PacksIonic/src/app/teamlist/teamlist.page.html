@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/leagues/{{matchId}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Team List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Please select team</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let team of teams">
+        <ion-label>{{team.teamName}}</ion-label>
+        <ion-radio [value]="team.teamName" checked="team.checked" (click)="updateRadio(team)"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="action !== 1">
+          <ion-button expand="block" (click) = "joinLeague()">Join</ion-button>
+      </ion-col>
+      <ion-col *ngIf="action == 1">
+          <ion-button expand="block" (click) = "switchTeam()">Switch Team</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

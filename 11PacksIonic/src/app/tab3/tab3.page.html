@@ -1,13 +1,35 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      My Teams
+      My Account
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <a routerLink="/squad/{{match.unique_id}}">
-      Create Team
-    </a>
+
+  <ion-list>
+    <ion-item>
+      <ion-buttons slot="start">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="log-out"></ion-icon>Logout
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-buttons slot="start">
+        <ion-button (click)="addBalance()">
+          <ion-icon slot="icon-only" name="wallet"></ion-icon>
+          Add Balance
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-buttons slot="start">
+        <ion-button (click)="refer()">
+          <ion-icon slot="icon-only" name="share"></ion-icon>Share
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
 </ion-content>

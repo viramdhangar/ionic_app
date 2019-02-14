@@ -1,30 +1,28 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/leagues/{{matchId}}"></ion-back-button>
+    </ion-buttons>
     <ion-title>My Teams</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let team of teams">
+  <ion-button color="secondary" expand="block" routerLink="/squad/{{matchId}}">Create Team</ion-button>
+  <ion-card style="border-radius: 20px;" *ngFor="let team of teams">
     <ion-grid>
       <ion-row>
-        <ion-col>{{team.teamName}}</ion-col>
-        <ion-col>
-          <ion-button routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.id}}">VIEW</ion-button>
+        <ion-col style="display: flex; align-items: center; justify-content: center">{{team.teamName}}</ion-col>
+        <ion-col style="display: flex; align-items: center; justify-content: center">
+          <ion-button style="width: 60%;height: 80%;" expand="block" color="secondary" routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{viewFlag}}">VIEW</ion-button>
         </ion-col>
-        <ion-col>
-          <ion-button routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}">EDIT</ion-button>
+        <ion-col style="display: flex; align-items: center; justify-content: center">
+          <ion-button style="width: 60%;height: 80%;" expand="block" color="secondary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{editFlag}}">EDIT</ion-button>
         </ion-col>
-        <ion-col>
-          <ion-button>COPY</ion-button>
+        <ion-col style="display: flex; align-items: center; justify-content: center">
+          <ion-button style="width: 60%;height: 80%;" expand="block" color="secondary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{copyFlag}}">COPY</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-button routerLink="/squad/{{matchId}}" style="background-color: white">Create Team</ion-button>
-  </ion-toolbar>
-</ion-footer>

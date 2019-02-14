@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>joined Teams rank</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
+      <ion-col style="display: flex; font-size: 12px; justify-content: center; color:green; border-radius: 20px;">
+        <ion-row>
+          <ion-col style="font-size:medium">WIN:</ion-col>
+          <ion-col style="font-size:medium"><b>&#x20b9;{{league.winningAmount}}</b></ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
+      <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
+      <ion-col></ion-col>
+      <ion-col *ngIf="matchStatus !== 'LIVE'">
+        <ion-button style="width: 80%;height: 80%;" expand="block" color="secondary"
+          routerLink="/switchteam/{{uniqueNumber}}/{{matchId}}/{{leagueId}}">Switch Team</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="display: flex; align-items: center; font-size: 12px; justify-content: left;">
+        <ion-row>
+          <ion-col>SIZE</ion-col>
+          <ion-col>{{league.joinedTeam}}/{{league.size}}</ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col
+        style="display: flex; font-size: 80%; color:white; align-items: center; justify-content: center; background:rgb(88, 165, 25); border-radius: 20px;">
+        <ion-row>ENTRY FEES &#x20b9; {{league.entryFee}}</ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card style="border-radius: 30px;" *ngFor="let team of joinedTeams">
+    <ion-grid *ngIf="matchStatus == 'LIVE' || matchStatus == 'COMPLETED'">
+      <ion-row routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.teamId}}/{{matchStatus}}">
+        <ion-col style="display: flex; font-size: 12px; justify-content: left;">
+          <div>
+            <p style="font-size: 8px">POS</p>
+            <p stype="font-size: 10px;"><b>{{team.teamRank}}</b></p>
+          </div>
+        </ion-col>
+        <ion-col style="display: flex; font-size: 12px; justify-content: center;">
+          <div>
+            <p style="font-size: 8px">USER</p>
+            <p stype="font-size: 10px;"><b>{{team.createdId}}({{team.teamName}})</b></p>
+          </div>
+        </ion-col>
+        <ion-col style="display: flex; font-size: 12px; justify-content: center;">
+          <div>
+            <p style="font-size: 8px">POINTS</p>
+            <p stype="font-size: 10px;"><b>{{team.points}}</b></p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="matchStatus !== 'LIVE' && matchStatus !== 'COMPLETED'">
+      <ion-row>
+        <ion-col style="display: flex; font-size: 12px; justify-content: left;">
+          <div>
+            <p style="font-size: 8px">POS</p>
+            <p stype="font-size: 10px;"><b>{{team.teamRank}}</b></p>
+          </div>
+        </ion-col>
+        <ion-col style="display: flex; font-size: 12px; justify-content: center;">
+          <div>
+            <p style="font-size: 8px">USER</p>
+            <p stype="font-size: 10px;"><b>{{team.createdId}}({{team.teamName}})</b></p>
+          </div>
+        </ion-col>
+        <ion-col style="display: flex; font-size: 12px; justify-content: center;">
+          <div>
+            <p style="font-size: 8px">POINTS</p>
+            <p stype="font-size: 10px;"><b>{{team.points}}</b></p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>verification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="block" (click)="sendEmailVerificationCode()">Verify your email</ion-button>
+  <ion-input  type="text" placeholder="Enter OTP" [(ngModel)]="emailOTP"></ion-input>
+  <ion-button expand="block" (click)="verify()">Verify</ion-button>
+</ion-content>

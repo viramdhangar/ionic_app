@@ -3,4 +3,5 @@ export class MatchTeam {
   uniqueNumber: String;
   matchId: String;
   players : any;
+  id : number;
 }

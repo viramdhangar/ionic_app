@@ -1,39 +1,42 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       Matches
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
-  <ion-card *ngFor="let match of matches">
-    <a routerLink="/leagues/{{match.unique_id}}">
-      <ion-grid>
-        <ion-row>
-          <ion-col></ion-col>
-          <ion-col>
-            {{match.team1Short}} vs {{match.team2Short}}
-          </ion-col>
-          <ion-col></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>{{match.team1Short}}</ion-col>
-          <ion-col>
-            {{match.type}}
-          </ion-col>
-          <ion-col>{{match.team2Short}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col></ion-col>
-          <ion-col>
-            {{match.time}}
-          </ion-col>
-          <ion-col></ion-col>
-        </ion-row>
-      </ion-grid>
-    </a>
+<ion-content>
+  <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-card style="border-radius: 30px;" *ngFor="let match of matches">
+    <ion-grid routerLink="/leagues/{{match.unique_id}}">
+      <ion-row>
+        <ion-col style="display: flex; align-items: center; justify-content: center">
+          <img class="circle-pic" src="{{match.team1Url}}">
+        </ion-col>
+        <ion-col>
+          <ion-row style="display: flex; align-items: center; justify-content: center">{{match.team1Short}} vs
+            {{match.team2Short}}</ion-row>
+          <ion-row style="display: flex; align-items: center; justify-content: center">{{match.type}}</ion-row>
+          <ion-row style="display: flex; align-items: center; justify-content: center">vs</ion-row>
+          <ion-row style="display: flex; align-items: center; justify-content: center;color:green;">
+            <ion-datetime displayFormat="h:mm a" pickerFormat="h mm a" [(ngModel)]="match.time">{{match.time}}
+            </ion-datetime>
+          </ion-row>
+        </ion-col>
+        <ion-col style="display: flex; align-items: center; justify-content: center">
+          <img class="circle-pic" src="{{match.team2Url}}">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card>
-
 </ion-content>

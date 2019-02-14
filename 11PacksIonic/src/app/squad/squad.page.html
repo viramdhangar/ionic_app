@@ -1,5 +1,8 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/teamsOfMatch"></ion-back-button>
+    </ion-buttons>
     <ion-title>Select Players</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -20,31 +23,16 @@
 </ion-segment>
 
 <ion-content>
-  <div [ngSwitch]="squads">
-    <ng-container *ngFor="let player of squad">
-      <div *ngSwitchCase="player.playingRole">
-        <ion-card class="item item-checkbox  checkbox-positive">
-          <div id="container" style="white-space:nowrap">
-            <div id="image" style="display:inline;">
-              <img src="{{player.imageURL}}" style="width:10%;height:10%;">
-            </div>
-          </div>​
-          <ion-grid>
-            <ion-row>
-              <ion-col></ion-col>
-              <ion-col>
-                <div id="texts" style="display:inline; white-space:nowrap;">
-                  {{player.name}} {{player.credit}} Cr {{player.playingTeamName}} {{player.playingRole}}
-                </div>
-              </ion-col>
-              <ion-col>
-                <ion-checkbox (click)="onSelect(player)" [(ngModel)]="player.selected"></ion-checkbox>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
-      </div>
-    </ng-container>
+  <div [ngSwitch]="squads" *ngFor="let player of squad">
+    <ion-list *ngSwitchCase="player.playingRole">
+      <ion-item>
+        <img class="circle-pic" src="{{player.imageURL}}" style="width:10%;height:60%;">&nbsp;&nbsp;&nbsp;
+        <ion-label>{{player.name}}</ion-label>
+        <ion-label>{{player.playingTeamName}}</ion-label>
+        <ion-label>{{player.credit}} cr</ion-label>
+        <ion-checkbox (click)="onSelect(player)" [(ngModel)]="player.selected"></ion-checkbox>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
 
@@ -52,23 +40,16 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        Players
+        <ion-row>Players</ion-row>
+        <ion-row>{{ totalSelected }} / 11</ion-row>
       </ion-col>
       <ion-col>
-        Credits
+        <ion-row>Credits</ion-row>
+        <ion-row>{{ totalCreditUsed }} / 100</ion-row>
       </ion-col>
       <ion-col style="display:inline;">
-        <ion-button (click)="onSubmit(squadSelected)">SAVE</ion-button>
+        <ion-button expand="block" (click)="onSubmit(squadSelected)">SAVE</ion-button>
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        {{ totalSelected }} / 11
-      </ion-col>
-      <ion-col>
-        {{ totalCreditUsed }}
-      </ion-col>
-      <ion-col></ion-col>
     </ion-row>
   </ion-grid>
 </ion-footer>
