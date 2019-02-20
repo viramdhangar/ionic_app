@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/leagues/{{matchId}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>Team List</ion-title>
+    <ion-title style="font-size: 80%; color:blue">{{match.team1Name}} vs
+      {{match.team2Name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,10 +26,10 @@
   <ion-grid>
     <ion-row>
       <ion-col *ngIf="action !== 1">
-          <ion-button expand="block" (click) = "joinLeague()">Join</ion-button>
+        <ion-button expand="block" (click)="joinLeague()">Join</ion-button>
       </ion-col>
       <ion-col *ngIf="action == 1">
-          <ion-button expand="block" (click) = "switchTeam()">Switch Team</ion-button>
+        <ion-button expand="block" (click)="switchTeam()">Switch Team</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

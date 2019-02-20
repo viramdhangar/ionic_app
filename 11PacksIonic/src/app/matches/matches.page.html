@@ -1,12 +1,7 @@
 <ion-header>
-  <ion-toolbar color="light">
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+  <ion-toolbar>
     <ion-title>
-      Matches
+      <img src="../../assets/icon/logo.png">
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -18,19 +13,17 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-card style="border-radius: 30px;" *ngFor="let match of matches">
+      <ion-card-header no-padding style="display: flex; align-items: center; justify-content: center; font-size: 80%; background: rgba(47, 104, 138, 0.863); color: white;"><b>{{match.team1Name}} Vs {{match.team2Name}}</b></ion-card-header> 
     <ion-grid routerLink="/leagues/{{match.unique_id}}">
       <ion-row>
         <ion-col style="display: flex; align-items: center; justify-content: center">
           <img class="circle-pic" src="{{match.team1Url}}">
         </ion-col>
         <ion-col>
-          <ion-row style="display: flex; align-items: center; justify-content: center">{{match.team1Short}} vs
-            {{match.team2Short}}</ion-row>
-          <ion-row style="display: flex; align-items: center; justify-content: center">{{match.type}}</ion-row>
-          <ion-row style="display: flex; align-items: center; justify-content: center">vs</ion-row>
+          <ion-row style="display: flex; align-items: center; justify-content: center ; font-size: 80%">{{match.type}}</ion-row>
+          <ion-row style="display: flex; align-items: center; justify-content: center">Vs</ion-row>
           <ion-row style="display: flex; align-items: center; justify-content: center;color:green;">
-            <ion-datetime displayFormat="h:mm a" pickerFormat="h mm a" [(ngModel)]="match.time">{{match.time}}
-            </ion-datetime>
+              {{match.time}}
           </ion-row>
         </ion-col>
         <ion-col style="display: flex; align-items: center; justify-content: center">

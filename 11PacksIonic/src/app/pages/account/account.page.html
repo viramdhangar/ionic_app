@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/tabs/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Total Amount: {{account.amount}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Deposited Amount: {{account.depositedAmount}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Bonus Amount: {{account.bonusAmount}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" routerLink="/addbalance">Add Balance</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -23,11 +23,13 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.styleBlackOpaque();
+      // set status bar to white
+      // this.statusBar.backgroundColorByHexString('#ffffff');
       this.splashScreen.hide();
-      this.authService.authenticationState.subscribe( state => {
+      this.authService.authenticationState.subscribe(state => {
         console.log("auth changes the state: ", state);
-        if(state){
+        if (state) {
           this.router.navigate(['/tabs/tabs/matches']);
         } else {
           this.router.navigate(['']);

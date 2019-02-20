@@ -7,29 +7,92 @@
 </ion-header>
 
 <ion-content>
-
   <ion-list>
     <ion-item>
-      <ion-buttons slot="start">
-        <ion-button (click)="logout()">
-          <ion-icon slot="icon-only" name="log-out"></ion-icon>Logout
-        </ion-button>
-      </ion-buttons>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button (click)="myProfile()">
+            <ion-icon slot="icon-only" name="person"></ion-icon>&nbsp;
+            My Profile
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-buttons slot="start">
-        <ion-button (click)="addBalance()">
-          <ion-icon slot="icon-only" name="wallet"></ion-icon>
-          Add Balance
-        </ion-button>
-      </ion-buttons>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button routerLink="/verification">
+            <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>&nbsp;
+            Verification
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-buttons slot="start">
-        <ion-button (click)="refer()">
-          <ion-icon slot="icon-only" name="share"></ion-icon>Share
-        </ion-button>
-      </ion-buttons>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button (click)="fantasyPointSystem()">
+            <ion-icon slot="icon-only" name="stats"></ion-icon>&nbsp;
+            Fantasy Point System
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button routerLink="/account/{{userName}}">
+            <ion-icon slot="icon-only" name="wallet"></ion-icon>&nbsp;
+            Account
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button routerLink="/account">
+            <ion-icon slot="icon-only" name="filing"></ion-icon>&nbsp;
+            Withdraw
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button routerLink="/refer">
+            <ion-icon slot="icon-only" name="contacts"></ion-icon>&nbsp;Refer & Earn
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button routerLink="/refer">
+            <ion-icon slot="icon-only" name="construct"></ion-icon>&nbsp;T&C
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button routerLink="/refer">
+            <ion-icon slot="icon-only" name="contact"></ion-icon>&nbsp;Contact Us
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-buttons slot="start">
+          <ion-button (click)="logout()">
+            <ion-icon slot="icon-only" name="log-out"></ion-icon>&nbsp;Logout
+          </ion-button>
+        </ion-buttons>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

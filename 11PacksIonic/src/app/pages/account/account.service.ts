@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+
 import { throwError, Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent, SubscriptionLike, PartialObserver } from 'rxjs';
 import { map, filter, scan, catchError } from 'rxjs/operators';
-import { AlertValidatorService } from '../../service/alert-validator.service';
-import { Router } from '@angular/router';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,36 +18,40 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrationService {
-
-  message: any;
-
-  constructor(private http: HttpClient, private alert: AlertValidatorService, private router: Router) { }
+export class AccountService {
 
   public API = environment.host;
-  public LEAGUES_API = this.API + '/identity';
+  public LEAGUES_API = this.API + '/api/v1';
+  message: any;
 
-  registration(user: any): Observable<any> {    
-    return this.http.post(this.LEAGUES_API + '/registration/', user, httpOptions).pipe(
+  constructor(private http: HttpClient) { }
+
+  getAccountInfo(userName: any) : Observable<any>{
+    console.log("username", this.http.get(this.LEAGUES_API + '/account/'+userName));
+    return this.http.get(this.LEAGUES_API + '/account/'+userName);
+  }
+  addBalance(account: any): Observable<any> {
+    console.log("account service", account);
+    console.log("account user service", account.username);
+    return this.http.get(this.LEAGUES_API + '/addBalance/'+account.depositedAmount+'/'+account.username).pipe(
       map((message: any) => {
         this.message = message;
         console.log("User: ", this.message);
-        this.alert.validateAlert("Registration successfully");
-        this.router.navigate(['/verification', user.email]);
+        
         return message;
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status == 200) {
           console.log("User: ", this.message);
-          this.alert.validateAlert("Registration successfully");
-          this.router.navigate(['/login']);
+          
           return this.message;
         }
         if ((err.status == 400) || (err.status == 404)) {
-          this.alert.validateAlert("Credientials not matching");
+          
           console.log("status", err.status);
+          return throwError(err);
         } else {
-          this.alert.validateAlert("Somthing is wrong...");
+          
           console.log("status", err.status);
           return throwError(err);
         }

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { AlertValidatorService } from '../service/alert-validator.service';
 import { LoadingController } from '@ionic/angular'; 
+import { MatchesService } from '../service/matches.service'
 
 @Component({
   selector: 'app-squad',
@@ -29,8 +30,13 @@ export class SquadPage implements OnInit {
   uniqueNumber: any;
   action: any;
   teamId: any;
+  match: any;
+  team1Name: string="none";
+  team1Count: number=0;
+  team2Name: string="none";
+  team2Count: number=0;
 
-  constructor(public loadingController: LoadingController, private storage: Storage, private squadService: SquadService, private route: ActivatedRoute, private alert: AlertValidatorService) {
+  constructor(private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private squadService: SquadService, private route: ActivatedRoute, private alert: AlertValidatorService) {
     this.squads = "WK";
    }
 
@@ -42,11 +48,14 @@ export class SquadPage implements OnInit {
       this.action = params['action']
     )
     this.getCurrentUser();
+    this.getMatch(this.matchId);
+    console.log("this.match init: ",this.matchId);
     if(this.action == 'EDIT' || this.action == 'COPY'){
       this.getSquadEditView(this.uniqueNumber, this.matchId , this.teamId);
     } else {
       this.ionViewDidLoad(this.matchId);
     }
+    console.log("Match intit: ",this.match);
   }
 
   async ionViewDidLoad(matchId: any) {
@@ -64,10 +73,13 @@ export class SquadPage implements OnInit {
   onSelect(player: any) {
     if (player.selected == true) {
       if (this.totalSelected < 11) {
+        
         if (player.playingRole == "BAT") {
           if (this.selectedBat.length < 5) {
-            this.selectedBat.push(player);
-            this.totalCreditUsed = this.totalCreditUsed + player.credit;
+            if(this.teamsPlayerCount(player) !== false){
+              this.selectedBat.push(player);
+              this.totalCreditUsed = this.totalCreditUsed + player.credit;
+            }
           } else {
             player.selected = false;
             this.alert.validateAlert("More then 5 batsman not allowed");
@@ -75,8 +87,10 @@ export class SquadPage implements OnInit {
         }
         if (player.playingRole == "BOWL") {
           if (this.selectedBowl.length < 5) {
+            if(this.teamsPlayerCount(player) !== false){
             this.selectedBowl.push(player);
             this.totalCreditUsed = this.totalCreditUsed + player.credit;
+            }
           } else {
             player.selected = false;
             this.alert.validateAlert("More then 5 bowlers not allowed");
@@ -84,8 +98,10 @@ export class SquadPage implements OnInit {
         }
         if (player.playingRole == "ALL") {
           if (this.selectedAll.length < 3) {
+            if(this.teamsPlayerCount(player) !== false){
             this.selectedAll.push(player);
             this.totalCreditUsed = this.totalCreditUsed + player.credit;
+            }
           } else {
             player.selected = false;
             this.alert.validateAlert("More then 3 allrounders not allowed");
@@ -93,8 +109,10 @@ export class SquadPage implements OnInit {
         }
         if (player.playingRole == "WK") {
           if (this.selectedWk.length < 1) {
+            if(this.teamsPlayerCount(player) !== false){
             this.selectedWk.push(player);
             this.totalCreditUsed = this.totalCreditUsed + player.credit;
+            }
           } else {
             player.selected = false;
             this.alert.validateAlert("Only one wicket keeper allowed");
@@ -105,6 +123,7 @@ export class SquadPage implements OnInit {
         player.selected = false;
       }
     } else {
+     
       if (player.playingRole == "BAT") {
         this.removePlayer(player, this.selectedBat);
       }
@@ -125,6 +144,7 @@ export class SquadPage implements OnInit {
     if (index !== -1) {
       playerList.splice(index, 1);
       this.totalCreditUsed = this.totalCreditUsed - player.credit;
+      this.teamsPlayerCountRemove(player);
     }
   }
   validatePlayerList(player: any) {
@@ -181,6 +201,7 @@ export class SquadPage implements OnInit {
         if(squ.selected == true){
           this.totalCreditUsed = this.totalCreditUsed + squ.credit;
           this.totalSelected = this.totalSelected + 1;
+          this.teamsPlayerCount(squ);
           if(squ.playingRole == "BAT"){
             this.selectedBat.push(squ);
           }
@@ -208,4 +229,42 @@ export class SquadPage implements OnInit {
       }
     })
   }
+
+  getMatch(matchId: any){
+    this.matchesService.getMatch(matchId).subscribe(match => {
+      this.match = match;
+      console.log("this.match", this.match);
+    });
+  }
+  teamsPlayerCount(player: any) {
+    // selected count team wise
+    this.team1Name = this.match.team1Short;
+    this.team2Name = this.match.team2Short
+    if(this.team1Name == player.playingTeamName){
+      if(this.team1Count == 7){
+        player.selected = false;
+        this.alert.validateAlert("Can not select more then 7 players from one team.");
+        return false;
+      }else{
+        this.team1Count++; 
+      }
+    }else{
+      if(this.team2Count == 7){
+        player.selected = false;
+        this.alert.validateAlert("Can not select more then 7 players from one team.");
+        return false;
+      }else{
+        this.team2Count++; 
+      }
+    }
+  }
+
+  teamsPlayerCountRemove(player: any){
+    if(this.team1Name == player.playingTeamName){
+      this.team1Count--; 
+    }else{
+      this.team2Count--; 
+    }
+  }
 }
+

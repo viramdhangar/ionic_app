@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../service/team.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatchesService } from '../service/matches.service'
 
 @Component({
   selector: 'app-teams',
@@ -15,8 +16,9 @@ export class TeamsPage implements OnInit {
   editFlag: any;
   copyFlag: any;
   viewFlag: any;
+  match: any;
 
-  constructor(private teamService: TeamService, private route: ActivatedRoute) { 
+  constructor(private teamService: TeamService, private route: ActivatedRoute, private  matchesService : MatchesService) { 
     this.editFlag="EDIT";
     this.copyFlag="COPY";
     this.viewFlag="VIEW";
@@ -25,6 +27,7 @@ export class TeamsPage implements OnInit {
   ngOnInit() {
     this.uniqueNumber = +this.route.snapshot.paramMap.get('uniqueNumber');
     this.matchId = +this.route.snapshot.paramMap.get('matchId');
+    this.getMatch(this.matchId);
     this.ionViewDidLoad(this.uniqueNumber, this.matchId);
   }
 
@@ -33,5 +36,10 @@ export class TeamsPage implements OnInit {
       this.teams = teams; 
     }) 
   }
-
+  getMatch(matchId: any){
+    this.matchesService.getMatch(matchId).subscribe(match => {
+      this.match = match;
+      console.log("on team list", this.match);
+    });
+  }
 }

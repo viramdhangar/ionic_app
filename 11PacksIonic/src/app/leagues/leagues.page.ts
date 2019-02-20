@@ -3,6 +3,7 @@ import { LeaguesService } from '../service/leagues.service';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular'; 
+import { MatchesService } from '../service/matches.service'
 
 @Component({
   selector: 'app-leagues',
@@ -18,9 +19,9 @@ export class LeaguesPage implements OnInit {
   matchStatus: any;
   uniqueNumber:any;
   user: any;
-  matchName: any;
+  match: any;
 
-  constructor(public loadingController: LoadingController, private storage: Storage, private leaguesService: LeaguesService, private route: ActivatedRoute) { 
+  constructor(private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private leaguesService: LeaguesService, private route: ActivatedRoute) { 
     this.leaguess = "ALL";
   }
 
@@ -28,14 +29,15 @@ export class LeaguesPage implements OnInit {
     this.matchId = +this.route.snapshot.paramMap.get('id');
     this.uniqueNumber = +this.route.snapshot.paramMap.get('uniqueNumber');
     this.joinedLeague = this.route.snapshot.params['joinedLeague'];
-   // this.route.params.subscribe( params =>
-   //   this.matchName = params['matchName']
+    //this.route.params.subscribe( params =>
+    // this.match = params['match']
    // )
-
+    console.log(this.match);
     this.getCurrentUser();
-    if(this.joinedLeague == "JOINED"){
+    this.getMatch(this.matchId);
+    if (this.joinedLeague == "JOINED") {
       this.getJoinedLeagues(this.uniqueNumber, this.matchId);
-    }else{
+    } else {
       this.joinedLeague = "JOIN";
       this.ionViewDidLoad(this.matchId);
     }
@@ -81,5 +83,11 @@ export class LeaguesPage implements OnInit {
         this.uniqueNumber = this.user.uniqueNumber;
       }
     })
+  }
+  getMatch(matchId: any){
+    this.matchesService.getMatch(matchId).subscribe(match => {
+      this.match = match;
+      console.log("this.match", this.match);
+    });
   }
 }

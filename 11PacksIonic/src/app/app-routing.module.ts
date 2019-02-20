@@ -26,6 +26,9 @@ const routes: Routes = [
   { path: 'joined-teamsrank/:uniqueNumber/:matchId/:leagueId/:matchStatus', loadChildren: './joined-teamsrank/joined-teamsrank.module#JoinedTeamsrankPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'verification', loadChildren: './pages/verification/verification.module#VerificationPageModule' },
+  { path: 'refer', loadChildren: './pages/refer/refer.module#ReferPageModule' },
+  { path: 'account/:username', loadChildren: './pages/account/account.module#AccountPageModule' },
+  { path: 'addbalance', loadChildren: './pages/addbalance/addbalance.module#AddbalancePageModule' },
  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
 ];
 @NgModule({

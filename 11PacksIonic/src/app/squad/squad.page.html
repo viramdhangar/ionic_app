@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/teamsOfMatch"></ion-back-button>
     </ion-buttons>
-    <ion-title>Select Players</ion-title>
+    <ion-title style="font-size: 80%; color:blue">{{match.team1Name}} vs
+        {{match.team2Name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -39,6 +40,10 @@
 <ion-footer>
   <ion-grid>
     <ion-row>
+      <ion-col>
+            <ion-row>{{match.team1Short}}/{{match.team2Short}}</ion-row>
+            <ion-row>{{team1Count}}/{{team2Count}}</ion-row>
+          </ion-col>
       <ion-col>
         <ion-row>Players</ion-row>
         <ion-row>{{ totalSelected }} / 11</ion-row>

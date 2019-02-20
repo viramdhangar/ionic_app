@@ -12,6 +12,7 @@ import { AuthenticationService } from '../service/authentication.service';
 export class MatchesPage {
 
   private matches: Array<any>;
+  match: any;
   public EXTENTION = '.png';
   public IMG_PATH = '../../assets/images/bigbash/';
     
@@ -65,8 +66,5 @@ export class MatchesPage {
       }
     })
     event.target.complete();
-  }
-  logout(){
-    this.authSevice.logout();
   }
 }

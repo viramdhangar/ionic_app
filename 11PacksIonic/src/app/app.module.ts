@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { SMS } from '@ionic-native/sms/ngx';
 /*import * as firebase from 'firebase';
 
 firebase.initializeApp({
@@ -29,6 +30,7 @@ firebase.initializeApp({
     StatusBar,
     SplashScreen,
     SocialSharing,
+    SMS,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
