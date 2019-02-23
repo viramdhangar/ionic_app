@@ -9,6 +9,11 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-button color="secondary" expand="block" routerLink="/squad/{{matchId}}">Create Team</ion-button>
   <ion-card style="border-radius: 20px;" *ngFor="let team of teams">
     <ion-grid>
@@ -27,3 +32,16 @@
     </ion-grid>
   </ion-card>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" routerLink="/leagues/{{match.unique_id}}">All Groups
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+    <ion-footer>

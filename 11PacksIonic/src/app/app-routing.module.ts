@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'refer', loadChildren: './pages/refer/refer.module#ReferPageModule' },
   { path: 'account/:username', loadChildren: './pages/account/account.module#AccountPageModule' },
   { path: 'addbalance', loadChildren: './pages/addbalance/addbalance.module#AddbalancePageModule' },
+  { path: 'starplayer/:uniqueNumber/:matchId/:teamId/:action', loadChildren: './pages/starplayer/starplayer.module#StarplayerPageModule' },
  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
 ];
 @NgModule({

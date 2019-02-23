@@ -16,7 +16,7 @@
       </ion-list-header>
       <ion-item *ngFor="let team of teams">
         <ion-label>{{team.teamName}}</ion-label>
-        <ion-radio [value]="team.teamName" checked="team.checked" (click)="updateRadio(team)"></ion-radio>
+        <ion-radio [value]="team.teamName" checked="team.checked" (click)="updateRadio(team)" checked="false"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>

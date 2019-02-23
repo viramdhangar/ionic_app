@@ -21,6 +21,11 @@
 </ion-segment>
 
 <ion-content>
+  <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <div [ngSwitch]="leaguess" *ngFor="let league of leagues">
     <ion-card style="border-radius: 30px;" *ngSwitchCase="league.status">
       <ion-grid>

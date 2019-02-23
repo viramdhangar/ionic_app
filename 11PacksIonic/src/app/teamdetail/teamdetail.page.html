@@ -13,7 +13,13 @@
     <ion-row style="display: flex; justify-content: center">
       <div *ngFor="let player of teamDetail">
         <div *ngIf="player.playingRole == 'WK'">
-          <ion-col style="display: flex; justify-content: center">
+          <ion-col *ngIf="player.captain == true"
+            style="display: flex; justify-content: center; background: blueviolet">
+            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
+              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+            </div>
+          </ion-col>
+          <ion-col *ngIf="player.captain == false" style="display: flex; justify-content: center">
             <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
               <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
             </div>

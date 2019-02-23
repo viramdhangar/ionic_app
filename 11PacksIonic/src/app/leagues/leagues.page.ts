@@ -90,4 +90,8 @@ export class LeaguesPage implements OnInit {
       console.log("this.match", this.match);
     });
   }
+  doRefresh(event) {
+    this.ionViewDidLoad(this.matchId);
+    event.target.complete();
+  }
 }

@@ -30,17 +30,21 @@ export class LeaguesService {
     return this.http.get(this.LEAGUES_API+'/leagues/'+matchId);
   }
 
+  getLeague(leagueId : any): Observable<any> {
+    return this.http.get(this.LEAGUES_API+'/league/'+leagueId);
+  }
+
   joinLeague(team : any, leagueId: any, uniqueNumber: any, matchId: any) {
     return this.http.post(this.LEAGUES_API + '/joinLeague/'+leagueId, team, httpOptions).pipe(
       map((response: any) => {
         this.alert.validateAlert("League joined successfully");
-        this.router.navigate(['/leagues', uniqueNumber, matchId, 'JOINED']);
+        this.router.navigate(['/leagues', matchId]);
         return response;
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status == 200) {
           this.alert.validateAlert(err.error.text);
-          this.router.navigate(['/leagues', uniqueNumber, matchId, 'JOINED']);
+          this.router.navigate(['/leagues', matchId]);
           return err.error.message;
         }
         if ((err.status == 417) || (err.status == 404)) {

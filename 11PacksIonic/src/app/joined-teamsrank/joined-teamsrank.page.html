@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>joined Teams rank</ion-title>
+    <ion-title>Joined Teams rank</ion-title>
     <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
       </ion-buttons>
@@ -8,6 +8,11 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
   <ion-grid>
     <ion-row>
       <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
@@ -41,7 +46,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card style="border-radius: 30px;" *ngFor="let team of joinedTeams">
+  <ion-card style="border-radius: 15px;" *ngFor="let team of joinedTeams">
     <ion-grid *ngIf="matchStatus == 'LIVE' || matchStatus == 'COMPLETED'">
       <ion-row routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.teamId}}/{{matchStatus}}">
         <ion-col style="display: flex; font-size: 12px; justify-content: left;">
@@ -88,3 +93,13 @@
     </ion-grid>
   </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button routerLink="/tabs/tabs/matches"><ion-icon name="home"></ion-icon>Matches</ion-button>
+      <ion-button routerLink="/tabs/tabs/matches"><ion-icon name ="trophy"></ion-icon>Joined Matches</ion-button>
+      <ion-button routerLink="/tabs/tabs/matches">More</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

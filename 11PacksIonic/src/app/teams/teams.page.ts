@@ -42,4 +42,8 @@ export class TeamsPage implements OnInit {
       console.log("on team list", this.match);
     });
   }
+  doRefresh(event) {
+    this.ionViewDidLoad(this.uniqueNumber, this.matchId);
+    event.target.complete();
+  }
 }

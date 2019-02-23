@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Select Captain Vice-Captaion</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item>
+    <ion-label>Choose Captain</ion-label>
+   <ion-select  (ionChange)="getOuterName($event)" [(ngModel)]="captain">
+    <ion-select-option *ngFor="let player of playerList" value="{{player.pid}}"> {{player.name}} </ion-select-option>
+</ion-select>
+</ion-item>
+
+<ion-item>
+  <ion-label>Choose Vice-Captain</ion-label>
+ <ion-select  (ionChange)="getOuterName($event)" [(ngModel)]="viceCaptain">
+  <ion-select-option *ngFor="let player of playerList" value="{{player.pid}}"> {{player.name}} </ion-select-option>
+</ion-select>
+</ion-item>
+
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="submitPlayers()">Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

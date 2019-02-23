@@ -28,9 +28,8 @@
     <ion-list *ngSwitchCase="player.playingRole">
       <ion-item>
         <img class="circle-pic" src="{{player.imageURL}}" style="width:10%;height:60%;">&nbsp;&nbsp;&nbsp;
-        <ion-label>{{player.name}}</ion-label>
-        <ion-label>{{player.playingTeamName}}</ion-label>
-        <ion-label>{{player.credit}} cr</ion-label>
+        <ion-label>{{player.name}}<br/>{{player.playingTeamName}} - {{player.credit}} cr</ion-label>
+        <ion-label>26</ion-label>
         <ion-checkbox (click)="onSelect(player)" [(ngModel)]="player.selected"></ion-checkbox>
       </ion-item>
     </ion-list>

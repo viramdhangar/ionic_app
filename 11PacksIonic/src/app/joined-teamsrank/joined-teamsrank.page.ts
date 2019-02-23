@@ -61,4 +61,8 @@ export class JoinedTeamsrankPage implements OnInit {
       }
     })
   }
+  doRefresh(event) {
+    this.ionViewDidLoad(this.uniqueNumber, this.matchId, this.leagueId);
+    event.target.complete();
+  }
 }

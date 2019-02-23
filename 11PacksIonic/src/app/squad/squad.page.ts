@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SquadService } from '../service/squad.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { AlertValidatorService } from '../service/alert-validator.service';
-import { LoadingController } from '@ionic/angular'; 
-import { MatchesService } from '../service/matches.service'
+import { LoadingController, ToastController, ModalController } from '@ionic/angular'; 
+import { MatchesService } from '../service/matches.service';
+import { StarplayerPage } from '../pages/starplayer/starplayer.page';
 
 @Component({
   selector: 'app-squad',
@@ -36,7 +37,7 @@ export class SquadPage implements OnInit {
   team2Name: string="none";
   team2Count: number=0;
 
-  constructor(private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private squadService: SquadService, private route: ActivatedRoute, private alert: AlertValidatorService) {
+  constructor(private router: Router, private modalController : ModalController, private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private squadService: SquadService, private route: ActivatedRoute, private alert: AlertValidatorService, private toastController: ToastController) {
     this.squads = "WK";
    }
 
@@ -49,10 +50,11 @@ export class SquadPage implements OnInit {
     )
     this.getCurrentUser();
     this.getMatch(this.matchId);
-    console.log("this.match init: ",this.matchId);
+    console.log("this.action: ",this.action);
     if(this.action == 'EDIT' || this.action == 'COPY'){
       this.getSquadEditView(this.uniqueNumber, this.matchId , this.teamId);
     } else {
+      this.action = 'NEW';
       this.ionViewDidLoad(this.matchId);
     }
     console.log("Match intit: ",this.match);
@@ -181,12 +183,17 @@ export class SquadPage implements OnInit {
       return false;
     }
     // if all validations good then insert the team now
-    const loading = await this.loadingController.create({
-      message: 'Loading...'
-    });
-    await loading.present();
-    this.squadService.createTeam(this.squadSelected, this.matchId, this.uniqueNumber, this.teamId, this.action)
-    loading.dismiss();
+    //const loading = await this.loadingController.create({
+    //  message: 'Loading...'
+    //});
+    //await loading.present();
+    console.log("from create : ", this.action);
+    this.storage.set('selectedTeam', this.squadSelected);
+    this.router.navigate(['/starplayer', this.uniqueNumber, this.matchId, this.teamId, this.action]);
+    //this.squadService.createTeam(this.squadSelected, this.matchId, this.uniqueNumber, this.teamId, this.action)
+    //loading.dismiss();
+    //this.storage.set('selectedTeam', this.squadSelected);
+    //this.router.navigate(['/starplayer', this.uniqueNumber, this.matchId, this.teamId, this.action]);
   }
 
   async getSquadEditView(uniqueNumber: any, matchId1: any, teamId: any){
@@ -216,6 +223,7 @@ export class SquadPage implements OnInit {
           }
         }
       }
+      //this.presentModal();
       this.squadSelected = this.selectedBat.concat(this.selectedWk).concat(this.selectedBowl).concat(this.selectedAll);
       loading.dismiss();
     })
@@ -266,5 +274,19 @@ export class SquadPage implements OnInit {
       this.team2Count--; 
     }
   }
+
+  //async presentModal() {
+   // const modal = await this.modalController.create({
+  //    component: StarplayerPage,
+  //    componentProps: { value: this.squadSelected }
+ //   });
+   // return await modal.present();
+ // }
+ updateCaptain(player){
+  console.log(player);
+ }
+ updateViceCaptain(player){
+ console.log(player);
+ }
 }
 
