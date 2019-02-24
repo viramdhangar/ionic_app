@@ -13,7 +13,7 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-card style="border-radius: 10px;" *ngFor="let match of matches">
-      <ion-card-header no-padding style="display: flex; align-items: center; justify-content: center; font-size: 80%; background:rgb(101, 101, 138); color: white"><b>{{match.team1Name}} Vs {{match.team2Name}}</b></ion-card-header> 
+      <ion-card-header padding style="display: flex; align-items: center; justify-content: center; font-size: 80%; background:rgb(101, 101, 138); color: white;"><b><i>{{match.team1Name}} Vs {{match.team2Name}}</i></b></ion-card-header> 
     <ion-grid routerLink="/leagues/{{match.unique_id}}">
       <ion-row>
         <ion-col style="display: flex; align-items: center; justify-content: center">

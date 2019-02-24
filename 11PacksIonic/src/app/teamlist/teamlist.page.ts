@@ -68,9 +68,9 @@ export class TeamlistPage implements OnInit {
   }
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Group Joining',
-      message: 'This gourp required Rs '+this.league.entryFee+' from your wallet',
+      header: 'Joining this Group ?',
+      subHeader: '',
+      message: 'Available balance - &#x20b9; '+this.account.amount+'<br/>Group joining fee  - &#x20b9; '+this.league.entryFee+'',
       buttons: [
         {
           text: 'Cancel',
