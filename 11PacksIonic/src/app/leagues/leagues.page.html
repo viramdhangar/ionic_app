@@ -6,17 +6,27 @@
     <ion-title style="font-size: 80%; color:blue">{{match.team1Name}} vs
         {{match.team2Name}}</ion-title>
   </ion-toolbar>
+  <ion-toolbar color="light">
+      <ion-title *ngIf="match.days !== 0"
+        style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
+        {{match.days}}d:{{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+      </ion-title>
+      <ion-title *ngIf="match.days == 0"
+        style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
+        {{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+      </ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-segment [(ngModel)]="leaguess">
+<ion-segment style="height: 5%;" [(ngModel)]="leaguess">
   <ion-segment-button value="ALL">
-    <ion-label>NL</ion-label>
+    <ion-label style="color: dark; font-size: 80%">NL</ion-label>
   </ion-segment-button>
   <ion-segment-button value="2">
-    <ion-label>H2H</ion-label>
+    <ion-label style="color: dark; font-size: 80%">H2H</ion-label>
   </ion-segment-button>
   <ion-segment-button value="3">
-    <ion-label>TRIPLE</ion-label>
+    <ion-label style="color: dark; font-size: 80%">TRIPLE</ion-label>
   </ion-segment-button>
 </ion-segment>
 
@@ -27,7 +37,7 @@
     </ion-refresher-content>
   </ion-refresher>
   <div [ngSwitch]="leaguess" *ngFor="let league of leagues">
-    <ion-card style="border-radius: 30px;" *ngSwitchCase="league.status">
+    <ion-card style="border-radius: 20px;" *ngSwitchCase="league.status">
       <ion-grid>
         <ion-row>
           <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
@@ -40,9 +50,9 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
+          <a (click)="presentModal(league.breakupId)"><ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
           <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
-          <ion-col></ion-col>
+          </a><ion-col></ion-col>
           <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOINED'">
             <ion-button style="width: 60%;height: 80%;" color="secondary" routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">Joined
             </ion-button>

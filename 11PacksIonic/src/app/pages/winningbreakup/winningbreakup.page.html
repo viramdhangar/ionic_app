@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Winnings</ion-title>
+    <ion-icon name="close" (click)="closeModal()" slot="end" padding></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label style="display: flex; font-size: 12px; justify-content: center;">Rank</ion-label>
+      <ion-label style="display: flex; font-size: 12px; justify-content: center;">Price</ion-label>
+    </ion-item>
+    <ion-item *ngFor="let winning of winningBreakup">
+      <ion-label style="display: flex; font-size: 12px; justify-content: center;">{{winning.prizeRank}}</ion-label>
+      <ion-label style="display: flex; font-size: 12px; justify-content: center;">{{winning.prizeMoney}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

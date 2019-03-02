@@ -17,7 +17,7 @@ export class TeamdetailService {
     return this.http.get(this.LEAGUES_API+'/teamView/'+uniqueNumber+'/'+matchId+'/'+teamId);
   }
 
-  getTeamDetailsWithPoints(teamId : any){
-    return this.http.get(this.LEAGUES_API+'/teamDetailWithPoints/'+teamId); 
+  getTeamDetailsWithPoints(matchId: any, teamId : any){
+    return this.http.get(this.LEAGUES_API+'/teamDetailWithPoints/'+matchId+'/'+teamId); 
   }
 }

@@ -4,8 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { LeaguesService } from '../service/leagues.service';
 import { AlertValidatorService } from '../service/alert-validator.service';
 import { MatchesService } from '../service/matches.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { AccountService } from '../pages/account/account.service';
+import { loadInternal } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-teamlist',
@@ -24,8 +25,9 @@ export class TeamlistPage implements OnInit {
   action: any;
   match: any;
   account: any;
+  loading: any;
 
-  constructor(private alertController: AlertController, private  matchesService : MatchesService, private teamService: TeamService, private leaguesService: LeaguesService, private route: ActivatedRoute, private alert: AlertValidatorService, private accountService: AccountService) { }
+  constructor(private alertController: AlertController, private  matchesService : MatchesService, private teamService: TeamService, private leaguesService: LeaguesService, private route: ActivatedRoute, private alert: AlertValidatorService, private accountService: AccountService, private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.uniqueNumber = +this.route.snapshot.paramMap.get('uniqueNumber');
@@ -105,4 +107,13 @@ export class TeamlistPage implements OnInit {
       this.account = response;
     });
   }
+
+  async presentLoading(){
+    const loading = await this.loadingController.create({
+      message: "Joining..."
+    });
+    await loading.present();
+    return loading;
+  }
 }
+ 

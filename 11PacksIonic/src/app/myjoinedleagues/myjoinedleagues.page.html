@@ -20,9 +20,9 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
+        <a (click)="presentModal(league.breakupId)"><ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
         <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
-        <ion-col></ion-col>
+      </a><ion-col></ion-col>
         <ion-col style="display: flex; font-size: 12px; justify-content: center;">
           <ion-button color="secondary"
             routerLink="/joined-teamsrank/{{uniqueNumber}}/{{matchId}}/{{league.id}}/{{matchStatus}}">View</ion-button>

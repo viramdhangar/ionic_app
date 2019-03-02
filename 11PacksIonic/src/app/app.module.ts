@@ -12,6 +12,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
 import { StarplayerPageModule } from './pages/starplayer/starplayer.module';
+import { WinningbreakupPageModule } from './pages/winningbreakup/winningbreakup.module';
+
 /*import * as firebase from 'firebase';
 
 firebase.initializeApp({
@@ -26,7 +28,7 @@ firebase.initializeApp({
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), StarplayerPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), StarplayerPageModule, WinningbreakupPageModule],
   providers: [
     StatusBar,
     SplashScreen,

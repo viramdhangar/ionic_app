@@ -39,11 +39,45 @@ export class TeamsPage implements OnInit {
   getMatch(matchId: any){
     this.matchesService.getMatch(matchId).subscribe(match => {
       this.match = match;
+      this.startTimer(this.match);
       console.log("on team list", this.match);
     });
   }
   doRefresh(event) {
     this.ionViewDidLoad(this.uniqueNumber, this.matchId);
     event.target.complete();
+  }
+
+  currentDate: any;
+  futureDate: any;
+  difference: any;
+  days: any;
+  hours: any;
+  minutes: any;
+  seconds: any;
+  
+  calculateRemainingTime(match: any) {
+    this.currentDate = new Date();
+    this.futureDate = new Date(match.date);
+    this.difference = this.futureDate.getTime() - this.currentDate.getTime();
+    this.seconds = Math.floor(this.difference / 1000);
+    this.minutes = Math.floor(this.seconds / 60);
+    this.hours = Math.floor(this.minutes / 60);
+    this.days = Math.floor(this.hours / 24);
+ 
+    this.hours %= 24;
+    this.minutes %= 60;
+    this.seconds %= 60;
+ 
+    match.days = this.days;
+    match.hours = this.hours;
+    match.minutes = this.minutes;
+    match.seconds = this.seconds;
+  }
+  interval: any;
+  startTimer(match: any) {
+    this.interval = setInterval(() => {
+      this.calculateRemainingTime(match);
+    }, 1000)
   }
 }

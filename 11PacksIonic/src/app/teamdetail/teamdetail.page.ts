@@ -29,7 +29,7 @@ export class TeamdetailPage implements OnInit {
     if(this.action == 'VIEW'){
       this.ionViewDidLoad(this.uniqueNumber, this.matchId, this.teamId);
     }else if(this.action == 'LIVE' || this.action == 'COMPLETED'){
-      this.getTeamDetailsWithPoints(this.teamId);
+      this.getTeamDetailsWithPoints(this.matchId, this.teamId);
     }
   }
 
@@ -40,20 +40,24 @@ export class TeamdetailPage implements OnInit {
     await loading.present();
     this.teamdetailService.getTeamDetail(uniqueNumber, matchId, teamId).subscribe(teamDetail => {
       this.teamDetail = teamDetail.players;
+      console.log("team : ",teamDetail.players);
       for(let team of this.teamDetail){
         console.log(team.name, team.playingRole);
       }
       loading.dismiss();
     })
   }
-  async getTeamDetailsWithPoints(teamId: any) {
+  async getTeamDetailsWithPoints(matchId: any, teamId: any) {
     const loading = await this.loadingController.create({
       message: 'Loading...'
     });
     await loading.present();
-    this.teamdetailService.getTeamDetailsWithPoints(teamId).subscribe(teamDetail => {
+    this.teamdetailService.getTeamDetailsWithPoints(matchId, teamId).subscribe(teamDetail => {
       this.teamDetail = teamDetail;
-      console.log(this.teamDetail);
+      console.log("team : ",teamDetail);
+      for(let team of this.teamDetail){
+        console.log(team.name, team.playingRole);
+      }
       loading.dismiss();
     })
   }

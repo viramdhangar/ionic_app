@@ -4,22 +4,32 @@
       <ion-back-button defaultHref="/teamsOfMatch"></ion-back-button>
     </ion-buttons>
     <ion-title style="font-size: 80%; color:blue">{{match.team1Name}} vs
-        {{match.team2Name}}</ion-title>
+      {{match.team2Name}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-title *ngIf="match.days !== 0"
+      style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
+      {{match.days}}d:{{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+    </ion-title>
+    <ion-title *ngIf="match.days == 0"
+      style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
+      {{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-segment [(ngModel)]="squads">
+<ion-segment style="height: 5%;" [(ngModel)]="squads">
   <ion-segment-button value="WK">
-    <ion-label>WK({{selectedWk.length}})</ion-label>
+    <ion-label style="color: dark; font-size: 80%">WK({{selectedWk.length}})</ion-label>
   </ion-segment-button>
   <ion-segment-button value="BAT">
-    <ion-label>BAT({{selectedBat.length}})</ion-label>
+    <ion-label style="color: dark; font-size: 80%">BAT({{selectedBat.length}})</ion-label>
   </ion-segment-button>
   <ion-segment-button value="ALL">
-    <ion-label>ALL({{selectedAll.length}})</ion-label>
+    <ion-label style="color: dark; font-size: 80%">ALL({{selectedAll.length}})</ion-label>
   </ion-segment-button>
   <ion-segment-button value="BOWL">
-    <ion-label>BOWL({{selectedBowl.length}})</ion-label>
+    <ion-label style="color: dark; font-size: 80%">BOWL({{selectedBowl.length}})</ion-label>
   </ion-segment-button>
 </ion-segment>
 
@@ -28,9 +38,9 @@
     <ion-list *ngSwitchCase="player.playingRole">
       <ion-item>
         <img class="circle-pic" src="{{player.imageURL}}" style="width:10%;height:60%;">&nbsp;&nbsp;&nbsp;
-        <ion-label>{{player.name}}<br/>{{player.playingTeamName}} - {{player.credit}} cr</ion-label>
-        <ion-label>26</ion-label>
-        <ion-checkbox (click)="onSelect(player)" [(ngModel)]="player.selected"></ion-checkbox>
+        <ion-label style="color: dark; font-size: 80%">{{player.name}}<br />{{player.credit}} Cr</ion-label>
+        <ion-label style="color: dark; font-size: 80%">{{player.playingTeamName}}</ion-label>
+        <ion-checkbox color="secondary" (click)="onSelect(player)" [(ngModel)]="player.selected"></ion-checkbox>
       </ion-item>
     </ion-list>
   </div>
@@ -38,18 +48,18 @@
 
 <ion-footer>
   <ion-grid>
-    <ion-row>
+    <ion-row style="display: flex; align-items: center; justify-content: center;">
       <ion-col>
-            <ion-row>{{match.team1Short}}/{{match.team2Short}}</ion-row>
-            <ion-row>{{team1Count}}/{{team2Count}}</ion-row>
-          </ion-col>
-      <ion-col>
-        <ion-row>Players</ion-row>
-        <ion-row>{{ totalSelected }} / 11</ion-row>
+        <ion-row style="color: dark; font-size: 70%">{{match.team1Short}}/{{match.team2Short}}</ion-row>
+        <ion-row style="color: dark; font-size: 80%">{{team1Count}}/{{team2Count}}</ion-row>
       </ion-col>
       <ion-col>
-        <ion-row>Credits</ion-row>
-        <ion-row>{{ totalCreditUsed }} / 100</ion-row>
+        <ion-row style="color: dark; font-size: 70%">PLAYERS</ion-row>
+        <ion-row style="color: dark; font-size: 80%">{{ totalSelected }} / 11</ion-row>
+      </ion-col>
+      <ion-col>
+        <ion-row style="color: dark; font-size: 70%">CREDITS</ion-row>
+        <ion-row style="color: dark; font-size: 80%">{{ totalCreditUsed }} / 100</ion-row>
       </ion-col>
       <ion-col style="display:inline;">
         <ion-button expand="block" (click)="onSubmit(squadSelected)">SAVE</ion-button>

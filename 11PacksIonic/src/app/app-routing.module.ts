@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'account/:username', loadChildren: './pages/account/account.module#AccountPageModule' },
   { path: 'addbalance', loadChildren: './pages/addbalance/addbalance.module#AddbalancePageModule' },
   { path: 'starplayer/:uniqueNumber/:matchId/:teamId/:action', loadChildren: './pages/starplayer/starplayer.module#StarplayerPageModule' },
+  { path: 'winningbreakup', loadChildren: './pages/winningbreakup/winningbreakup.module#WinningbreakupPageModule' },
  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
 ];
 @NgModule({

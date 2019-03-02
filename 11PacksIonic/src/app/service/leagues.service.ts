@@ -64,7 +64,10 @@ export class LeaguesService {
   }
 
   switchTeam(team : any, leagueId: any, teamId: any) {
-    console.log(this.http.post(this.LEAGUES_API + '/switchTeam/'+leagueId+'/'+teamId, team, httpOptions));
     return this.http.post(this.LEAGUES_API + '/switchTeam/'+leagueId+'/'+teamId, team, httpOptions);
+  }
+
+  getWinningBreakup(breakupId: number){
+    return this.http.get(this.LEAGUES_API+'/winningBreakup/' + breakupId);
   }
 }

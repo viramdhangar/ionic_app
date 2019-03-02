@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MyjoinedleaguesService } from '../service/myjoinedleagues.service';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { WinningbreakupPage } from '../pages/winningbreakup/winningbreakup.page';
 
 @Component({
   selector: 'app-myjoinedleagues',
@@ -14,7 +16,7 @@ export class MyjoinedleaguesPage implements OnInit {
   matchStatus: any;
   uniqueNumber: any;
 
-  constructor(private myjoinedleaguesService: MyjoinedleaguesService, private route: ActivatedRoute) { }
+  constructor(public modalController: ModalController, private myjoinedleaguesService: MyjoinedleaguesService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.matchId = +this.route.snapshot.paramMap.get('matchId');
@@ -34,4 +36,11 @@ export class MyjoinedleaguesPage implements OnInit {
     })
   }
 
+  async presentModal(breakupId: any) {
+    const modal = await this.modalController.create({
+      component: WinningbreakupPage,
+      componentProps: { value: breakupId }
+    });
+    return await modal.present();
+  }
 }

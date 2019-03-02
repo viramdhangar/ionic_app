@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular'; 
 import { MatchesService } from '../service/matches.service'
+import { ModalController } from '@ionic/angular';
+import { WinningbreakupPage } from '../pages/winningbreakup/winningbreakup.page';
 
 @Component({
   selector: 'app-leagues',
@@ -21,7 +23,7 @@ export class LeaguesPage implements OnInit {
   user: any;
   match: any;
 
-  constructor(private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private leaguesService: LeaguesService, private route: ActivatedRoute) { 
+  constructor(public modalController: ModalController, private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private leaguesService: LeaguesService, private route: ActivatedRoute) { 
     this.leaguess = "ALL";
   }
 
@@ -87,11 +89,52 @@ export class LeaguesPage implements OnInit {
   getMatch(matchId: any){
     this.matchesService.getMatch(matchId).subscribe(match => {
       this.match = match;
+      this.startTimer(this.match);
       console.log("this.match", this.match);
     });
   }
   doRefresh(event) {
     this.ionViewDidLoad(this.matchId);
     event.target.complete();
+  }
+
+  async presentModal(breakupId: any) {
+    const modal = await this.modalController.create({
+      component: WinningbreakupPage,
+      componentProps: { value: breakupId }
+    });
+    return await modal.present();
+  }
+
+  currentDate: any;
+  futureDate: any;
+  difference: any;
+  days: any;
+  hours: any;
+  minutes: any;
+  seconds: any;
+  calculateRemainingTime(match: any) {
+    this.currentDate = new Date();
+    this.futureDate = new Date(match.date);
+    this.difference = this.futureDate.getTime() - this.currentDate.getTime();
+    this.seconds = Math.floor(this.difference / 1000);
+    this.minutes = Math.floor(this.seconds / 60);
+    this.hours = Math.floor(this.minutes / 60);
+    this.days = Math.floor(this.hours / 24);
+ 
+    this.hours %= 24;
+    this.minutes %= 60;
+    this.seconds %= 60;
+ 
+    match.days = this.days;
+    match.hours = this.hours;
+    match.minutes = this.minutes;
+    match.seconds = this.seconds;
+  }
+  interval: any;
+  startTimer(match: any) {
+    this.interval = setInterval(() => {
+      this.calculateRemainingTime(match);
+    }, 1000)
   }
 }
