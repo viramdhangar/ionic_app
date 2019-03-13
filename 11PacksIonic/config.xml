@@ -89,4 +89,5 @@
     </plugin>
     <plugin name="cordova-sms-plugin" spec="1.0.0" />
     <engine name="android" spec="7.1.4" />
+    <engine name="browser" spec="5.0.4" />
 </widget>

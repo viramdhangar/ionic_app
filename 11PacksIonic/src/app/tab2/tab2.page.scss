@@ -1,4 +1,8 @@
-.image {
+.welcome-card ion-img {
+    max-height: 35vh;
+    overflow: hidden;
+  }
+  .image {
     height: 5vw; 
     width: 5vw; 
    border: 2px solid #fff;
@@ -10,8 +14,24 @@
   }
   
   .circle-pic{
-   width:50%;
-   height:50%;
+   width:50px;
+   height:50px;
    -webkit-border-radius: 50%;
    border-radius: 50%;
+  }
+  .toolbar-background {
+    color: rgb(36, 56, 122);
+  }
+  ion-header {
+    color: blue;
+  }
+  .ion-card ion-row{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+  }
+  .ion-card ion-col{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
   }

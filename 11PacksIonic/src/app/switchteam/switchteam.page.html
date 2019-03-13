@@ -1,11 +1,15 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref=""></ion-back-button>
+          <!--<ion-back-button routerLink="/joined-teamsrank/{{uniqueNumber}}/{{matchId}}/{{leagueId}}/{{matchStatus}}"></ion-back-button>-->
+        </ion-buttons>
     <ion-title>Switch Team</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <!--<ion-list>
     <ion-radio-group>
       <ion-list-header>
         <ion-label>Please select team to switch</ion-label>
@@ -16,17 +20,19 @@
         <ion-radio [value]="team.teamName" checked="team.checked" (click)="existingTeam(team)" checked=false></ion-radio>
       </ion-item>
     </ion-radio-group>
-  </ion-list>
+  </ion-list>-->
   <ion-list>
       <ion-radio-group>
         <ion-list-header>
           <ion-label>Available teams to switch</ion-label>
         </ion-list-header>
-        <ion-item *ngFor="let team of availableTeamsToSwitch">
+        <div *ngFor="let team of availableTeamsToSwitch">
+        <ion-item *ngIf="team.id != teamId">
           <ion-label>{{team.teamName}}</ion-label>
           <ion-label>{{team.uniqueNumber}}</ion-label>
           <ion-radio [value]="team.teamName" checked="team.checked" (click)="newTeam(team)" checked=false></ion-radio>
         </ion-item>
+        </div>
       </ion-radio-group>
     </ion-list>
 </ion-content>
@@ -34,7 +40,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-title>
-      <ion-button expand="block" (click)="switchTeam()" routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{leagueId}}">Switch</ion-button>
+        <ion-button expand="block" (click)="switchTeam()">Switch</ion-button>
     </ion-title>
   </ion-toolbar>
 </ion-footer>

@@ -5,6 +5,7 @@ import { throwError, Observable, Subject, asapScheduler, pipe, of, from, interva
 import { map, filter, scan, catchError } from 'rxjs/operators';
 import { AlertValidatorService } from '../../service/alert-validator.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,7 +23,7 @@ export class RegistrationService {
 
   message: any;
 
-  constructor(private http: HttpClient, private alert: AlertValidatorService, private router: Router) { }
+  constructor(private http: HttpClient, private alert: AlertValidatorService, private router: Router, private toastController: ToastController) { }
 
   public API = environment.host;
   public LEAGUES_API = this.API + '/identity';
@@ -32,26 +33,49 @@ export class RegistrationService {
       map((message: any) => {
         this.message = message;
         console.log("User: ", this.message);
-        this.alert.validateAlert("Registration successfully");
+        this.toastAlert("Registration successfully");
         this.router.navigate(['/verification', user.email]);
         return message;
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status == 200) {
           console.log("User: ", this.message);
-          this.alert.validateAlert("Registration successfully");
+          this.toastAlert("Registration successfully");
           this.router.navigate(['/login']);
           return this.message;
         }
         if ((err.status == 400) || (err.status == 404)) {
-          this.alert.validateAlert("Credientials not matching");
+          this.toastErrorAlert("Credientials not matching");
           console.log("status", err.status);
         } else {
-          this.alert.validateAlert("Somthing is wrong...");
+          this.toastErrorAlert("Somthing is wrong...");
           console.log("status", err.status);
           return throwError(err);
         }
       })
     );
+  }
+  async toastAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'success',
+      closeButtonText: 'Done',
+      duration: 5000
+    });
+    return await toast.present();
+  }
+
+  async toastErrorAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
+      closeButtonText: 'Done',
+      duration: 5000
+    });
+    return await toast.present();
   }
 }

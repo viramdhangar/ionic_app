@@ -1,20 +1,20 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>
       My Matches
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-segment [(ngModel)]="matchess">
+<ion-segment style="height: 6%;" [(ngModel)]="matchess">
   <ion-segment-button value="UPCOMING">
-    <ion-label>UPCOMING</ion-label>
+    <ion-label style="color: dark; font-size: 80%">UPCOMING</ion-label>
   </ion-segment-button>
   <ion-segment-button value="LIVE">
-    <ion-label>LIVE</ion-label>
+    <ion-label style="color: dark; font-size: 80%">LIVE</ion-label>
   </ion-segment-button>
   <ion-segment-button value="COMPLETED">
-    <ion-label>RESULT</ion-label>
+    <ion-label style="color: dark; font-size: 80%">COMPLETED</ion-label>
   </ion-segment-button>
 </ion-segment>
 
@@ -27,7 +27,7 @@
   <div [ngSwitch]="matchess" *ngFor="let match of matches">
 
     <ion-card style="border-radius: 10px;" *ngSwitchCase="match.matchStatus">
-      <ion-grid routerLink="/myjoinedleagues/{{uniqueNumber}}/{{match.match.unique_id}}/{{match.matchStatus}}">
+      <ion-grid routerLink="/myjoinedleagues/{{username}}/{{match.match.unique_id}}/{{match.matchStatus}}">
         <ion-row>
           <ion-col style="display: flex; align-items: center; justify-content: center">
             <img class="circle-pic" src="{{match.match.team1Url}}">
@@ -40,18 +40,21 @@
                 <b><i>{{match.match.formattedTeamName}}</i></b>
               </ion-col>
             </ion-row>
-            <ion-row *ngIf="match.match.liveFlag == true"
+            <ion-row *ngIf="match.match.liveFlag == true && match.matchStatus == 'LIVE'"
               style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
               Live
             </ion-row>
-            
+            <ion-row *ngIf="match.match.liveFlag == true && match.matchStatus == 'COMPLETED'"
+            style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
+            Completed
+          </ion-row>
             <ion-row *ngIf="match.match.days !== 0 && match.match.liveFlag == false"
               style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
-              {{match.match.days}}d:{{match.match.hours!}}h:{{match.match.minutes}}m:{{match.match.seconds}}s
+              {{match.match.days}}d {{match.match.hours!}}h {{match.match.minutes}}m {{match.match.seconds}}s
             </ion-row>
             <ion-row *ngIf="match.match.days == 0 && match.match.liveFlag == false"
               style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
-              {{match.match.hours!}}h:{{match.match.minutes}}m:{{match.match.seconds}}s
+              {{match.match.hours!}}h {{match.match.minutes}}m {{match.match.seconds}}s
             </ion-row>
           </ion-col>
           <ion-col style="display: flex; align-items: center; justify-content: center">

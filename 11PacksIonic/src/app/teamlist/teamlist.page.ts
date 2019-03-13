@@ -86,11 +86,7 @@ export class TeamlistPage implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             if(this.account.amount >= this.league.entryFee){
-              this.leaguesService.joinLeague(this.team, this.leagueId, this.uniqueNumber, this.matchId).subscribe(successMsg => {
-                console.log("mesage : "+successMsg.toString);
-                this.successMsg = successMsg.toString;
-                this.alert.validateAlert("You have joined the league");
-              })
+              this.leaguesService.joinLeague(this.team, this.leagueId, this.uniqueNumber, this.matchId);
             } else {
               this.alert.validateAlert("Please add balance to your wallet");
             }

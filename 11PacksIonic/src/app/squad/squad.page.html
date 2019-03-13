@@ -1,24 +1,24 @@
 <ion-header>
-  <ion-toolbar color="light">
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/teamsOfMatch"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-size: 80%; color:blue">{{match.team1Name}} vs
+    <ion-title style="font-size: 80%;">{{match.team1Name}} vs
       {{match.team2Name}}</ion-title>
   </ion-toolbar>
   <ion-toolbar color="light">
     <ion-title *ngIf="match.days !== 0"
       style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-      {{match.days}}d:{{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+      {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
     </ion-title>
     <ion-title *ngIf="match.days == 0"
       style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-      {{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+      {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-segment style="height: 5%;" [(ngModel)]="squads">
+<ion-segment style="height: 6%;" [(ngModel)]="squads">
   <ion-segment-button value="WK">
     <ion-label style="color: dark; font-size: 80%">WK({{selectedWk.length}})</ion-label>
   </ion-segment-button>

@@ -34,7 +34,7 @@ export class JoinedteamsPage implements OnInit {
   }
 
   ionViewDidLoad(uniqueNumber: any, matchId: any, leagueId: any) {
-    this.joinedteamsService.allJoinedTeamsInLeague(matchId, leagueId).subscribe(joinedTeams => {
+    this.joinedteamsService.allJoinedTeamsInLeague(uniqueNumber, matchId, leagueId).subscribe(joinedTeams => {
       this.joinedTeams = joinedTeams;
     })
   }

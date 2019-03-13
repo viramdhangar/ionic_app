@@ -84,7 +84,7 @@ export class SquadPage implements OnInit {
             }
           } else {
             player.selected = false;
-            this.alert.validateAlert("More then 5 batsman not allowed");
+            this.toastErrorAlert("More then 5 batsman not allowed");
           }
         }
         if (player.playingRole == "BOWL") {
@@ -95,7 +95,7 @@ export class SquadPage implements OnInit {
             }
           } else {
             player.selected = false;
-            this.alert.validateAlert("More then 5 bowlers not allowed");
+            this.toastErrorAlert("More then 5 bowlers not allowed");
           }
         }
         if (player.playingRole == "ALL") {
@@ -106,7 +106,7 @@ export class SquadPage implements OnInit {
             }
           } else {
             player.selected = false;
-            this.alert.validateAlert("More then 3 allrounders not allowed");
+            this.toastErrorAlert("More then 3 allrounders not allowed");
           }
         }
         if (player.playingRole == "WK") {
@@ -117,11 +117,11 @@ export class SquadPage implements OnInit {
             }
           } else {
             player.selected = false;
-            this.alert.validateAlert("Only one wicket keeper allowed");
+            this.toastErrorAlert("Only one wicket keeper allowed");
           }
         }
       } else {
-        this.alert.validateAlert("Already selected 11 players");
+        this.toastErrorAlert("Already selected 11 players");
         player.selected = false;
       }
     } else {
@@ -155,31 +155,31 @@ export class SquadPage implements OnInit {
   }
   async onSubmit(selectPlayerList: any) {
     if (this.totalSelected > 11 || this.totalSelected < 11) {
-      this.alert.validateAlert("Please select 11 players");
+      this.toastErrorAlert("Please select 11 players");
       return false;
     }
     if (this.totalCreditUsed > 100) {
-      this.alert.validateAlert("credits should not go beyond 100");
+      this.toastErrorAlert("credits should not go beyond 100");
       return false;
     }
-    if (this.totalCreditUsed > 100) {
-      this.alert.validateAlert("credits should not go beyond 100");
+    /*if (this.totalCreditUsed > 100) {
+      this.toastErrorAlert("credits should not go beyond 100");
       return false;
-    }
+    }*/
     if (this.selectedWk.length !== 1) {
-      this.alert.validateAlert("There should be one wicketkeeper");
+      this.toastErrorAlert("There should be one wicketkeeper");
       return false;
     }
     if (this.selectedBat.length < 3 || this.selectedBat.length > 5) {
-      this.alert.validateAlert("3 - 5 batsman can be selected");
+      this.toastErrorAlert("3 - 5 batsman can be selected");
       return false;
     }
     if (this.selectedBowl.length < 3 || this.selectedBowl.length > 5) {
-      this.alert.validateAlert("3 - 5 bowlers can be selected");
+      this.toastErrorAlert("3 - 5 bowlers can be selected");
       return false;
     }
     if (this.selectedAll.length < 1 || this.selectedAll.length > 3) {
-      this.alert.validateAlert("1 - 3 allrounder can be selected");
+      this.toastErrorAlert("1 - 3 allrounder can be selected");
       return false;
     }
     // if all validations good then insert the team now
@@ -252,7 +252,7 @@ export class SquadPage implements OnInit {
     if(this.team1Name == player.playingTeamName){
       if(this.team1Count == 7){
         player.selected = false;
-        this.alert.validateAlert("Can not select more then 7 players from one team.");
+        this.toastErrorAlert("Can not select more then 7 players from one team.");
         return false;
       }else{
         this.team1Count++; 
@@ -260,7 +260,7 @@ export class SquadPage implements OnInit {
     }else{
       if(this.team2Count == 7){
         player.selected = false;
-        this.alert.validateAlert("Can not select more then 7 players from one team.");
+        this.toastErrorAlert("Can not select more then 7 players from one team.");
         return false;
       }else{
         this.team2Count++; 
@@ -321,5 +321,17 @@ export class SquadPage implements OnInit {
      this.calculateRemainingTime(match);
    }, 1000)
  }
+
+ async toastErrorAlert(errorMessage: any) {
+  const toast = await this.toastController.create({
+    message: errorMessage,
+    showCloseButton: true,
+    position: 'top',
+    color: 'danger',
+    closeButtonText: 'Ok',
+    duration: 5000
+  });
+  return await toast.present();
+}
 }
 

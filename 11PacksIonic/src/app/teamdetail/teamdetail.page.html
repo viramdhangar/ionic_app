@@ -1,113 +1,70 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Team Detail</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title>{{uniqueNumber}} ({{teamName}})</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="secondary">
-  
+<ion-content class="ion-content">
+
   <ion-grid>
-    <ion-row style="display: flex; justify-content: center">Wicket Keeper</ion-row>
-    <ion-row style="display: flex; justify-content: center">
+      <ion-row *ngIf="action == 'UPCOMING' || action == 'JOINED' && teams.length > 1" style="text-align:right">
+          <ion-button shape="round" size="small" color="tertiary"
+            routerLink="/switchteam/{{uniqueNumber}}/{{matchId}}/{{teamId}}/{{leagueId}}/{{action}}">SWITCH</ion-button>
+        </ion-row>    
+    <ion-row style="justify-content: center">Wicket Keeper</ion-row>
+    <ion-row style="justify-content: center">
       <div *ngFor="let player of teamDetail">
         <div *ngIf="player.playingRole == 'WK'">
-          <ion-col *ngIf="player.captain == true"
-            style="display: flex; justify-content: center; background: blueviolet">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == true"
-            style="display: flex; justify-content: center; background: burlywood">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == false && player.captain == false"
-            style="display: flex; justify-content: center">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+          <ion-col style="display: flex; text-align: center; color:white">
+            <div style="font-size: 10px"><img class="circle-pic" src="{{player.imageURL}}"><br />
+              <p *ngIf="team1Name == player.playingTeamName" style="background: darkblue">{{player.name}}</p>
+              <p *ngIf="team2Name == player.playingTeamName" style="background: brown">{{player.name}}</p>
+              {{player.points}} Pts <b *ngIf="player.captain == true" style="background: black">C</b><b *ngIf="player.viceCaptain == true" style="background: black">VC</b>
             </div>
           </ion-col>
         </div>
       </div>
     </ion-row>
-
     <ion-row style="display: flex; justify-content: center">Batsman</ion-row>
     <ion-row style="display: flex; justify-content: center">
       <div *ngFor="let player of teamDetail">
         <div *ngIf="player.playingRole == 'BAT'">
-          <ion-col *ngIf="player.captain == true"
-            style="display: flex; justify-content: center; background: blueviolet">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == true"
-            style="display: flex; justify-content: center; background: burlywood">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == false && player.captain == false"
-            style="display: flex; justify-content: center">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+          <ion-col style="display: flex; text-align: center; color:white">
+            <div style="font-size: 10px"><img class="circle-pic" src="{{player.imageURL}}"><br />
+              <p *ngIf="team1Name == player.playingTeamName" style="background: darkblue">{{player.name}}</p>
+              <p *ngIf="team2Name == player.playingTeamName" style="background: brown">{{player.name}}</p>
+              {{player.points}} Pts <b *ngIf="player.captain == true" style="background: black">C</b><b *ngIf="player.viceCaptain == true" style="background: black">VC</b>
             </div>
           </ion-col>
         </div>
       </div>
     </ion-row>
-
-    <ion-row style="display: flex; justify-content: center">All Rounder</ion-row>
-    <ion-row style="display: flex; justify-content: center">
+    <ion-row style="justify-content: center">All Rounder</ion-row>
+    <ion-row style="justify-content: center">
       <div *ngFor="let player of teamDetail">
         <div *ngIf="player.playingRole == 'ALL'">
-          <ion-col *ngIf="player.captain == true"
-            style="display: flex; justify-content: center; background: blueviolet">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == true"
-            style="display: flex; justify-content: center; background: burlywood">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == false && player.captain == false"
-            style="display: flex; justify-content: center">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+          <ion-col style="display: flex; text-align: center; color:white">
+            <div style="font-size: 10px"><img class="circle-pic" src="{{player.imageURL}}"><br />
+              <p *ngIf="team1Name == player.playingTeamName" style="background: darkblue">{{player.name}}</p>
+              <p *ngIf="team2Name == player.playingTeamName" style="background: brown">{{player.name}}</p>
+              {{player.points}} Pts <b *ngIf="player.captain == true" style="background: black">C</b><b *ngIf="player.viceCaptain == true" style="background: black">VC</b>
             </div>
           </ion-col>
         </div>
       </div>
     </ion-row>
-
     <ion-row style="display: flex; justify-content: center">Bowler</ion-row>
     <ion-row style="display: flex; justify-content: center">
       <div *ngFor="let player of teamDetail">
         <div *ngIf="player.playingRole == 'BOWL'">
-          <ion-col *ngIf="player.captain == true"
-            style="display: flex; justify-content: center; background: blueviolet">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == true"
-            style="display: flex; justify-content: center; background: burlywood">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
-            </div>
-          </ion-col>
-          <ion-col *ngIf="player.viceCaptain == false && player.captain == false"
-            style="display: flex; justify-content: center">
-            <div><img class="circle-pic" src="{{player.imageURL}}">&nbsp;&nbsp;&nbsp;<br />
-              <p style="font-size: 10px">{{player.name}}({{player.points}})</p>
+          <ion-col style="display: flex; text-align: center; color:white">
+            <div style="font-size: 10px"><img class="circle-pic" src="{{player.imageURL}}"><br />
+              <p *ngIf="team1Name == player.playingTeamName" style="background: darkblue">{{player.name}}</p>
+              <p *ngIf="team2Name == player.playingTeamName" style="background: brown">{{player.name}}</p>
+              {{player.points}} Pts <b *ngIf="player.captain == true" style="background: black">C</b><b *ngIf="player.viceCaptain == true" style="background: black">VC</b>
             </div>
           </ion-col>
         </div>
@@ -115,3 +72,10 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<!--<ion-header *ngIf="action == 'UPCOMING' || action == 'JOINED'">
+    <ion-toolbar color="grey">
+        <ion-button shape="round" size="small" color="tertiary"
+        routerLink="/switchteam/{{uniqueNumber}}/{{matchId}}/{{teamId}}/{{leagueId}}/{{action}}">SWITCH</ion-button>
+    </ion-toolbar>
+  </ion-header>-->

@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  selector: 'app-tabs1',
+  templateUrl: './tabs1.page.html',
+  styleUrls: ['./tabs1.page.scss'],
 })
-export class TabsPage {
+export class Tabs1Page implements OnInit {
 
   user: any;
   uniqueNumber: any;
@@ -32,4 +32,5 @@ export class TabsPage {
       console.log(this.user);
     });
   }
+
 }

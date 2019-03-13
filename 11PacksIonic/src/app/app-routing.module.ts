@@ -14,13 +14,13 @@ const routes: Routes = [
   { path: 'leagues/:id', loadChildren: './leagues/leagues.module#LeaguesPageModule' },
   { path: 'squad/:matchId', loadChildren: './squad/squad.module#SquadPageModule' },
   { path: 'teamsOfMatch/:uniqueNumber/:matchId', loadChildren: './teams/teams.module#TeamsPageModule' },
-  { path: 'teamView/:uniqueNumber/:matchId/:teamId/:action', loadChildren: './teamdetail/teamdetail.module#TeamdetailPageModule' },
+  { path: 'teamView/:uniqueNumber/:matchId/:teamId/:leagueId/:action', loadChildren: './teamdetail/teamdetail.module#TeamdetailPageModule' },
   { path: 'teamEdit/:uniqueNumber/:matchId/:teamId/:action', loadChildren: './squad/squad.module#SquadPageModule' },
   { path: 'teamlist/:uniqueNumber/:matchId/:leagueObj/:action', loadChildren: './teamlist/teamlist.module#TeamlistPageModule' },
   { path: 'edit-team', loadChildren: './edit-team/edit-team.module#EditTeamPageModule' },
   { path: 'joinedteams/:uniqueNumber/:matchId/:leagueId', loadChildren: './joinedteams/joinedteams.module#JoinedteamsPageModule' },
   { path: 'joinedteams/:uniqueNumber/:matchId/:leagueId/:matchStatus', loadChildren: './joinedteams/joinedteams.module#JoinedteamsPageModule' },
-  { path: 'switchteam/:uniqueNumber/:matchId/:leagueId', loadChildren: './switchteam/switchteam.module#SwitchteamPageModule' },
+  { path: 'switchteam/:uniqueNumber/:matchId/:teamId/:leagueId/:matchStatus', loadChildren: './switchteam/switchteam.module#SwitchteamPageModule' },
   { path: 'joinedmatches', loadChildren: './joinedmatches/joinedmatches.module#JoinedmatchesPageModule' },
   { path: 'myjoinedleagues/:uniqueNumber/:matchId/:matchStatus', loadChildren: './myjoinedleagues/myjoinedleagues.module#MyjoinedleaguesPageModule' },
   { path: 'joined-teamsrank/:uniqueNumber/:matchId/:leagueId/:matchStatus', loadChildren: './joined-teamsrank/joined-teamsrank.module#JoinedTeamsrankPageModule' },
@@ -31,6 +31,8 @@ const routes: Routes = [
   { path: 'addbalance', loadChildren: './pages/addbalance/addbalance.module#AddbalancePageModule' },
   { path: 'starplayer/:uniqueNumber/:matchId/:teamId/:action', loadChildren: './pages/starplayer/starplayer.module#StarplayerPageModule' },
   { path: 'winningbreakup', loadChildren: './pages/winningbreakup/winningbreakup.module#WinningbreakupPageModule' },
+  { path: 'progress-bar', loadChildren: './pages/progress-bar/progress-bar.module#ProgressBarPageModule' },
+  { path: 'tabs1', loadChildren: './tabs1/tabs1.module#Tabs1PageModule' },
  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
 ];
 @NgModule({

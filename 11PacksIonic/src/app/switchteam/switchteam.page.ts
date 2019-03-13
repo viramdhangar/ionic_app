@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JoinedteamsService } from '../service/joinedteams.service';
 import { TeamService } from '../service/team.service';
 import { SwitchteamService } from '../service/switchteam.service';
+import { ToastController } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-switchteam',
@@ -13,7 +14,6 @@ export class SwitchteamPage implements OnInit {
 
   joinedTeams: any;
   leagueId: any;
-  existingTeamObj: any;
   newTeamObj: any;
   action :any;
   uniqueNumber: any;
@@ -21,8 +21,11 @@ export class SwitchteamPage implements OnInit {
   allCreatedTeams:any;
   availableTeamsToSwitch: any;
   successMsg: any;
-
-  constructor(private switchteamService: SwitchteamService, private teamService: TeamService, private joinedteamsService: JoinedteamsService, private route: ActivatedRoute) { 
+  matchStatus: any;
+  teamId: any;
+  isSelected: boolean =false;
+  
+  constructor(private switchteamService: SwitchteamService, private teamService: TeamService, private joinedteamsService: JoinedteamsService, private route: ActivatedRoute, private toastController: ToastController, private router: Router) { 
     this.action="switch";
   }
 
@@ -30,40 +33,51 @@ export class SwitchteamPage implements OnInit {
     const matchId = +this.route.snapshot.paramMap.get('matchId');
     const uniqueNumber = +this.route.snapshot.paramMap.get('uniqueNumber');
     const leagueId = +this.route.snapshot.paramMap.get('leagueId');
+    this.teamId = +this.route.snapshot.paramMap.get('teamId');
+    this.matchStatus = this.route.snapshot.params['matchStatus'];
     this.leagueId = leagueId;
     this.uniqueNumber = uniqueNumber;
     this.matchId = matchId;
-    this.ionViewDidLoad(uniqueNumber, matchId, leagueId);
-    this.getTeamsToSwitch(uniqueNumber, matchId);
+    this.ionViewDidLoad(uniqueNumber, matchId);
   }
 
-  ionViewDidLoad(uniqueNumber: any, matchId: any, leagueId: any) {
-    this.joinedteamsService.myJoinedTeamsInLeague(uniqueNumber, matchId, leagueId).subscribe(joinedTeams => {
-      this.joinedTeams = joinedTeams;
-      console.log(this.joinedTeams);
-    })
-  }
-
-  existingTeam(team: any){
-    this.existingTeamObj = team;
-  }
-
-  newTeam(team: any){
-    this.newTeamObj = team;
-  }
-
-  getTeamsToSwitch(uniqueNumber : any , matchId : any) {
+  ionViewDidLoad(uniqueNumber: any, matchId: any) {
     this.teamService.getTeams( uniqueNumber, matchId).subscribe(allCreatedTeams => {
       this.allCreatedTeams = allCreatedTeams;
       this.availableTeamsToSwitch = allCreatedTeams;
     })
   }
 
+  newTeam(team: any){
+    this.isSelected = true;
+    this.newTeamObj = team;
+  }
+
   switchTeam(){
-    console.log("new : "+this.newTeamObj.teamName+" league"+this.leagueId+" old"+this.existingTeamObj.teamName);
-    this.switchteamService.switchTeam(this.newTeamObj, this.leagueId, this.existingTeamObj.id).subscribe(successMsg => {
-      console.log("mesage : "+successMsg.toString);
-      this.successMsg = successMsg.toString;
-    })
+    if(this.isSelected == true){
+      this.switchteamService.switchTeam(this.newTeamObj, this.leagueId, this.teamId).subscribe(successMsg => {
+        console.log("mesage : "+successMsg.toString);
+        this.successMsg = successMsg.toString;
+        if(this.matchStatus == 'JOINED'){
+          this.router.navigate(['/joinedteams', this.uniqueNumber, this.matchId, this.leagueId, this.matchStatus]);
+        }else if(this.matchStatus == 'UPCOMING'){
+          this.router.navigate(['/joined-teamsrank', this.uniqueNumber, this.matchId, this.leagueId, this.matchStatus]);
+        }
+      })
+    }else{
+      this.toastErrorAlert("Nothing selected");
+      return false;
+    }
+  }
+  async toastErrorAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
+      closeButtonText: 'Ok',
+      duration: 5000
+    });
+    return await toast.present();
   }
 }

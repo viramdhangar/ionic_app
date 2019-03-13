@@ -5,6 +5,7 @@ import { throwError, Observable, Subject, asapScheduler, pipe, of, from, interva
 import { map, filter, scan, catchError } from 'rxjs/operators';
 import { AlertValidatorService } from '../service/alert-validator.service';
 import { Router } from '@angular/router';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,7 +21,7 @@ const httpOptions = {
 })
 export class LeaguesService {
 
-  constructor(private http:HttpClient, private alert: AlertValidatorService, private router: Router) { }
+  constructor(private http:HttpClient, private alert: AlertValidatorService, private router: Router, private toastController: ToastController, private loadingController: LoadingController) { }
 
   public API = environment.host;
   public LEAGUES_API = this.API + '/api/v1';
@@ -34,29 +35,43 @@ export class LeaguesService {
     return this.http.get(this.LEAGUES_API+'/league/'+leagueId);
   }
 
-  joinLeague(team : any, leagueId: any, uniqueNumber: any, matchId: any) {
+  async joinLeague(team : any, leagueId: any, uniqueNumber: any, matchId: any) {
+    const loading = await this.loadingController.create({
+      message: "Joining..."
+    });
+    await loading.present();
     return this.http.post(this.LEAGUES_API + '/joinLeague/'+leagueId, team, httpOptions).pipe(
       map((response: any) => {
-        this.alert.validateAlert("League joined successfully");
+        loading.dismiss();
+        this.toastAlert("League joined successfully");
+        //this.alert.validateAlert("League joined successfully");
         this.router.navigate(['/leagues', matchId]);
         return response;
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status == 200) {
-          this.alert.validateAlert(err.error.text);
+          loading.dismiss();
+          this.toastAlert(err.error.text);
+          //this.alert.validateAlert(err.error.text);
           this.router.navigate(['/leagues', matchId]);
           return err.error.message;
         }
-        if ((err.status == 417) || (err.status == 404)) {
-          this.alert.validateAlert(err.error.errorMessage);
+        if ((err.status == 417) || (err.status == 404) || (err.status == 409)) {
+          loading.dismiss();
+          this.toastErrorAlert(err.error.errorMessage);
+          //this.alert.validateAlert(err.error.errorMessage);
           return throwError(err);
         } else {
-          this.alert.validateAlert("Somthing is wrong...");
-          console.log("status", err.status);
+          loading.dismiss();
+          this.toastErrorAlert(err.error.errorMessage);
+          //this.alert.validateAlert("Somthing is wrong...");
+          //console.log("status", err.status);
           return throwError(err);
         }
       })
-    );
+    ).subscribe((message)=>{
+      loading.dismiss();
+    });
   }
 
   getJoinedLeagues(uniqueNumber: any, matchId: any) : Observable<any> {
@@ -69,5 +84,29 @@ export class LeaguesService {
 
   getWinningBreakup(breakupId: number){
     return this.http.get(this.LEAGUES_API+'/winningBreakup/' + breakupId);
+  }
+
+  async toastAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'success',
+      closeButtonText: 'Done',
+      duration: 5000
+    });
+    return await toast.present();
+  }
+
+  async toastErrorAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
+      closeButtonText: 'Done',
+      duration: 5000
+    });
+    return await toast.present();
   }
 }

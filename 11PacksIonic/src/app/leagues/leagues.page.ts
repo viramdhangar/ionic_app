@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LeaguesService } from '../service/leagues.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular'; 
 import { MatchesService } from '../service/matches.service'
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { WinningbreakupPage } from '../pages/winningbreakup/winningbreakup.page';
+import { TeamService } from '../service/team.service';
 
 @Component({
   selector: 'app-leagues',
@@ -22,8 +23,11 @@ export class LeaguesPage implements OnInit {
   uniqueNumber:any;
   user: any;
   match: any;
+  loadTillThen: number = 0;
+  progress: number = 0;
+  teams: any;
 
-  constructor(public modalController: ModalController, private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private leaguesService: LeaguesService, private route: ActivatedRoute) { 
+  constructor(public modalController: ModalController, private  matchesService : MatchesService, public loadingController: LoadingController, private storage: Storage, private leaguesService: LeaguesService, private route: ActivatedRoute, private teamService: TeamService, private router : Router, private toastController: ToastController) { 
     this.leaguess = "ALL";
   }
 
@@ -58,11 +62,21 @@ export class LeaguesPage implements OnInit {
       this.leagues = leagues;
       for(let league of this.leagues){
         league.status = "ALL";
+        setInterval(() => {
+          if (league.progress < (league.joinedTeam/league.size)*100)
+            league.progress += 1;
+          else
+            clearInterval(league.progress);
+        }, 50);
       }
       loading.dismiss();
     })
   }
+  
+  
+  setProgressBar(league: any) {
 
+  }
   async getJoinedLeagues(uniqueNumber: any, matchId: any) {
     const loading = await this.loadingController.create({
       message: 'Loading...'
@@ -73,6 +87,12 @@ export class LeaguesPage implements OnInit {
       this.leagues = leagues;
       for(let league of this.leagues){
         league.status = "ALL";
+        setInterval(() => {
+          if (league.progress < (league.joinedTeam/league.size)*100)
+            league.progress += 1;
+          else
+            clearInterval(league.progress);
+        }, 50);
       }
       console.log(this.leagues);
       loading.dismiss();
@@ -136,5 +156,29 @@ export class LeaguesPage implements OnInit {
     this.interval = setInterval(() => {
       this.calculateRemainingTime(match);
     }, 1000)
+  }
+
+  joinTeam(leagueId: any){
+    this.teamService.getTeams( this.uniqueNumber, this.matchId).subscribe(teams => {
+      this.teams = teams;
+      if(teams.length > 0){
+        this.router.navigate(['/teamlist', this.uniqueNumber, this.matchId, leagueId, 2]);
+      }else{
+        this.router.navigate(['/teamsOfMatch', this.uniqueNumber, this.matchId]);
+        this.toastErrorAlert("Create team to join the group");
+      }
+    })
+  }
+
+  async toastErrorAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
+      closeButtonText: 'Done',
+      duration: 5000
+    });
+    return await toast.present();
   }
 }

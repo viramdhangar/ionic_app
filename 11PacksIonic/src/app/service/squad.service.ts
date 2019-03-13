@@ -79,7 +79,7 @@ export class SquadService {
         }
       })
     ).subscribe((message)=>{
-
+      loading.dismiss();
     });
   }
   getSquadEditView(uniqueNumber: any, matchId: any, teamId: any) : Observable<any> {
@@ -92,7 +92,7 @@ export class SquadService {
       showCloseButton: true,
       position: 'top',
       closeButtonText: 'Done',
-      duration: 2000
+      duration: 5000
     });
     return await toast.present();
   }

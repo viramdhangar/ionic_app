@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TabsPage } from './tabs.page';
+import { Tabs1Page } from './tabs1.page';
 
 const routes: Routes = [
   {
     path: 'tabs',
-    component: TabsPage,
+    component: Tabs1Page,
     children: [
       {
-        path: 'matches',
+        path: 'matches/tabs1/leagues/:id',
         children: [
           {
             path: '',
-            loadChildren: '../matches/matches.module#MatchesPageModule'
+            loadChildren: '../leagues/leagues.module#LeaguesPageModule'
           }
         ]
       },
@@ -37,14 +37,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/matches',
+        redirectTo: '/tabs/matches/tabs1/leagues/:id',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/matches',
+    redirectTo: '/tabs/matches/tabs1/leagues/:id',
     pathMatch: 'full'
   }
 ];
@@ -53,4 +53,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class Tabs1PageRoutingModule {}

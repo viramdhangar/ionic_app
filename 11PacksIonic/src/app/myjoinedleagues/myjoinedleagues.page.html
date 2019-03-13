@@ -1,14 +1,78 @@
 <ion-header>
-  <ion-toolbar color="light">
-    <ion-title>Joined Leagues</ion-title>
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
-        <ion-back-button routerLink="/tabs/tabs/tab2"></ion-back-button>
-      </ion-buttons>
+      <ion-back-button routerLink="/tabs/tabs/tab2/{{uniqueNumber}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size: 80%;">{{match.team1Name}} vs
+      {{match.team2Name}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="grey" style="text-align:center">
+    <ion-title *ngIf="match.days !== 0 && matchStatus == 'UPCOMING'"
+      style="display: flex; align-items: left; justify-content: left; font-size: 80%; color:green">
+      {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+    </ion-title>
+    <ion-title *ngIf="match.days == 0 && matchStatus == 'UPCOMING'"
+      style="display: flex; align-items: left; justify-content: left; font-size: 80%; color:green">
+      {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+    </ion-title>
+    <ion-title *ngIf="matchStatus == 'LIVE'"
+      style="display: flex; align-items: left; justify-content: left; font-size: 70%; color:green">
+      LIVE LEAGUES
+    </ion-title>
+    <ion-title *ngIf="matchStatus == 'COMPLETED'"
+      style="display: flex; align-items: left; justify-content: left; font-size: 70%; color:green">
+      COMPLETED LEAGUES
+    </ion-title>
+    <ion-title *ngIf="matchStatus == 'UPCOMING'"
+      style="display: flex; align-items: left; justify-content: left; font-size: 70%; color:blue">
+      UPCOMING LEAGUES
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card style="border-radius: 30px;" *ngFor="let league of leagues">
+  <ion-card style="border-radius: 10px;" *ngFor="let league of leagues">
+    <ion-grid>
+      <ion-row>
+        <ion-col style="text-align:left; padding-top: 1%">
+          <font color="grey" size="2%">Group Prize</font><br />
+          <font color="green" size="4%"><b>&#8377; {{league.winningAmount}}</b></font>
+        </ion-col>
+        <ion-col style="text-align:right; padding-top: 0%">
+          <ion-button shape="round" size="small" color="tertiary"
+            routerLink="/joined-teamsrank/{{uniqueNumber}}/{{matchId}}/{{league.id}}/{{matchStatus}}">VIEW</ion-button>
+        </ion-col>
+      </ion-row>
+      <!--<progress-bar [progress]="loadProgress"></progress-bar>-->
+
+      <div
+        style="margin: 5px 1%;width: 96%;padding: 0px;text-align: center;background-color: #f4f4f4;border: #fff;border-radius: 10px;">
+        <div
+          style="min-width: 15%;height: 3px;white-space: nowrap;overflow: hidden;padding: 0px;border-radius: 10px;background-color: purple;"
+          *ngIf="league.progress !==0" [style.width]="league.progress + '%'">
+          {{league.progress}}%
+        </div>
+      </div>
+
+      <ion-row>
+        <ion-col style="text-align:left; padding-top: 1%; font-size: 80%">
+          <font color="grey" size="1%">size</font><br />
+          <b>{{league.joinedTeam}}/{{league.size}}</b>
+        </ion-col>
+        <ion-col style="text-align:center; padding-top: 1%; font-size: 80%; color: green">
+          <font color="grey" size="1%">Entry</font><br />
+          <b>&#8377; {{league.entryFee}}</b>
+        </ion-col>
+        <ion-col style="text-align:center; padding-top: 1%; font-size: 80%">
+          <font color="grey" size="1%">WINNERS</font><br />
+          <a (click)="presentModal(league.breakupId)"><b>{{league.winners}}</b></a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+  <!--<ion-card style="border-radius: 30px;" *ngFor="let league of leagues">
     <ion-grid>
       <ion-row>
         <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
@@ -41,7 +105,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
+  </ion-card>-->
 </ion-content>
 
 <ion-footer>

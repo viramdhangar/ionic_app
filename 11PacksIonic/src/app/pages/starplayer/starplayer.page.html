@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-    <ion-title>Select Captain Vice-Captaion</ion-title>
+    <ion-title style="font-size: 80%;">Select Captain Vice-Captaion</ion-title>
     
   </ion-toolbar>
 </ion-header>
@@ -16,18 +16,27 @@
   </ion-refresher>
 
   <ion-item>
-    <ion-label>Choose Captain</ion-label>
+    <ion-label style="font-size: 80%;">Choose Captain</ion-label>
    <ion-select  (ionChange)="getOuterName($event)" [(ngModel)]="captain">
     <ion-select-option *ngFor="let player of playerList" value="{{player.pid}}"> {{player.name}} </ion-select-option>
 </ion-select>
 </ion-item>
 
 <ion-item>
-  <ion-label>Choose Vice-Captain</ion-label>
+  <ion-label style="font-size: 80%;">Choose Vice-Captain</ion-label>
  <ion-select  (ionChange)="getOuterName($event)" [(ngModel)]="viceCaptain">
   <ion-select-option *ngFor="let player of playerList" value="{{player.pid}}"> {{player.name}} </ion-select-option>
 </ion-select>
 </ion-item>
+
+  <ul>
+    <li style="font-size: 70%;">
+      Captain will get 2X points.
+    </li>
+    <li style="font-size: 70%;">
+      Vice-Captain will get 1.5X points.
+    </li>
+  </ul>
 
   
 </ion-content>

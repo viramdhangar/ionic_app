@@ -26,9 +26,8 @@ export class JoinedteamsService {
     return this.http.get(this.LEAGUES_API + '/joinedLeagueTeams/' + uniqueNumber + '/' + matchId + '/' + leagueId);
   }
 
-  allJoinedTeamsInLeague(matchId: any, leagueId: any): Observable<any> {
-    console.log("In Service: "+this.http.get(this.LEAGUES_API + '/joinedLeagueAllTeams/' + matchId + '/' + leagueId));
-    return this.http.get(this.LEAGUES_API + '/joinedLeagueAllTeams/' + matchId + '/' + leagueId);
+  allJoinedTeamsInLeague(uniqueNumber: any, matchId: any, leagueId: any): Observable<any> {
+    return this.http.get(this.LEAGUES_API + '/joinedLeagueAllTeams/' + uniqueNumber + '/'+ matchId + '/' + leagueId);
   }
 
   getJoinedMatches(uniqueNumber: any) {

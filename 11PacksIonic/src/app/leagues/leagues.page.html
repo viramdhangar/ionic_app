@@ -1,24 +1,22 @@
 <ion-header>
-  <ion-toolbar color="light">
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-back-button routerLink="/tabs/tabs/matches"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-size: 80%; color:blue">{{match.team1Name}} vs
-        {{match.team2Name}}</ion-title>
+    <ion-title style="font-size: 80%;">{{match.team1Name}} vs
+      {{match.team2Name}}</ion-title>
   </ion-toolbar>
-  <ion-toolbar color="light">
-      <ion-title *ngIf="match.days !== 0"
-        style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-        {{match.days}}d:{{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
-      </ion-title>
-      <ion-title *ngIf="match.days == 0"
-        style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-        {{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
-      </ion-title>
-    </ion-toolbar>
+  <ion-toolbar color="grey">
+    <ion-title *ngIf="match.days !== 0" style="display: flex; align-items: left; justify-content: left; font-size: 80%; color:green">
+      {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+    </ion-title>
+    <ion-title *ngIf="match.days == 0" style="display: flex; align-items: left; justify-content: left; font-size: 80%; color:green">
+      {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-segment style="height: 5%;" [(ngModel)]="leaguess">
+<ion-segment style="height: 6%;" [(ngModel)]="leaguess">
   <ion-segment-button value="ALL">
     <ion-label style="color: dark; font-size: 80%">NL</ion-label>
   </ion-segment-button>
@@ -37,28 +35,157 @@
     </ion-refresher-content>
   </ion-refresher>
   <div [ngSwitch]="leaguess" *ngFor="let league of leagues">
-    <ion-card style="border-radius: 20px;" *ngSwitchCase="league.status">
+    <ion-card style="border-radius: 10px;" *ngSwitchCase="league.status">
+      <ion-grid>
+        <ion-row>
+          <ion-col style="text-align:left; padding-top: 1%">
+            <font color="grey" size="2%">Group Prize</font><br />
+            <font color="green" size="4%"><b>&#8377; {{league.winningAmount}}</b></font>
+          </ion-col>
+          <ion-col *ngIf="joinedLeague == 'JOINED'" style="text-align:right; padding-top: 0%">
+            <ion-button shape="round" size="small" color="tertiary"
+              routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}/{{joinedLeague}}">JOINED</ion-button>
+          </ion-col>
+          <ion-col *ngIf="joinedLeague == 'JOIN'" style="text-align:right; padding-top: 0%">
+            <ion-button shape="round" size="small" color="tertiary" (click)="joinTeam(league.id)">JOIN</ion-button>
+          </ion-col>
+        </ion-row>
+        <!--<progress-bar [progress]="loadProgress"></progress-bar>-->
+        <!--<div class="sk-rotating-plane"></div>-->
+        <div
+          style="margin: 5px 1%;width: 96%;padding: 0px;text-align: center;background-color: #f4f4f4;border: #fff;border-radius: 10px;">
+          <div
+            style="min-width: 15%;height: 3px;white-space: nowrap;overflow: hidden;padding: 0px;border-radius: 10px;background-color: purple;"
+            *ngIf="league.progress !==0" [style.width]="league.progress + '%'">
+            {{league.progress}}%
+          </div>
+        </div>
+
+        <ion-row>
+          <ion-col style="text-align:left; padding-top: 1%; font-size: 80%">
+            <font color="grey" size="1%">size</font><br />
+            <b>{{league.joinedTeam}}/{{league.size}}</b>
+          </ion-col>
+          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%; color: green">
+            <font color="grey" size="1%">Entry</font><br />
+            <b>&#8377; {{league.entryFee}}</b>
+          </ion-col>
+          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%">
+            <font color="grey" size="1%">WINNERS</font><br />
+            <a (click)="presentModal(league.breakupId)"><b>{{league.winners}}</b></a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card style="border-radius: 10px;" *ngSwitchCase="league.size">
+      <ion-grid>
+        <ion-row>
+          <ion-col style="text-align:left; padding-top: 1%">
+            <font color="grey" size="2%">Group Prize</font><br />
+            <font color="green" size="4%"><b>&#8377; {{league.winningAmount}}</b></font>
+          </ion-col>
+          <ion-col *ngIf="joinedLeague == 'JOINED'" style="text-align:right; padding-top: 0%">
+            <ion-button shape="round" size="small" color="tertiary"
+              routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">JOINED</ion-button>
+          </ion-col>
+          <ion-col *ngIf="joinedLeague == 'JOIN'" style="text-align:right; padding-top: 0%">
+            <ion-button shape="round" size="small" color="tertiary" (click)="joinTeam(league.id)">JOIN</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div
+          style="margin: 5px 1%;width: 96%;padding: 0px;text-align: center;background-color: #f4f4f4;border: #fff;border-radius: 10px;">
+          <div
+            style="min-width: 15%;height: 3px;white-space: nowrap;overflow: hidden;padding: 0px;border-radius: 10px;background-color: purple;"
+            *ngIf="league.progress !==0" [style.width]="league.progress + '%'">
+            {{league.progress}}%
+          </div>
+        </div>
+
+        <ion-row>
+          <ion-col style="text-align:left; padding-top: 1%; font-size: 80%">
+            <font color="grey" size="1%">size</font><br />
+            <b>{{league.joinedTeam}}/{{league.size}}</b>
+          </ion-col>
+          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%; color: green">
+            <font color="grey" size="1%">Entry</font><br />
+            <b>&#8377; {{league.entryFee}}</b>
+          </ion-col>
+          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%">
+            <font color="grey" size="1%">WINNERS</font><br />
+            <a (click)="presentModal(league.breakupId)"><b>{{league.winners}}</b></a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <!--<div [ngSwitch]="leaguess" *ngFor="let league of leagues">
+    <ion-card style="border-radius: 10px;" *ngSwitchCase="league.status">
       <ion-grid>
         <ion-row>
           <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
+          <a (click)="presentModal(league.breakupId)">
+            <ion-col *ngIf="league.winners == 1" style="color:blue;">Single Winner</ion-col>
+            <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
+          </a>
+        </ion-row>
+        <ion-row>
+          <ion-col style="display: flex; font-size: 12px; justify-content: left; color:green; border-radius: 20px;">
+            <ion-row style="display: flex; font-size: 12px; justify-content: left;">
+              <ion-col style="font-size:medium">WIN:</ion-col>
+              <ion-col style="font-size:medium"><b>&#x20b9;{{league.winningAmount}}</b></ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col></ion-col>
+          <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOINED'">
+            <ion-button style="width: 60%;height: 80%;" color="secondary"
+              routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">Joined
+            </ion-button>
+          </ion-col>
+          <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOIN'">
+            <ion-button expand="block" style="width: 60%;height: 80%;" color="secondary"
+              routerLink="/teamlist/{{uniqueNumber}}/{{matchId}}/{{league.id}}/2">Join
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="display: flex; align-items: center; font-size: 12px; justify-content: left;">
+            <ion-row>
+              <ion-col>SIZE</ion-col>
+              <ion-col>{{league.joinedTeam}}/{{league.size}}</ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col></ion-col>
           <ion-col
-            style="display: flex; font-size: 12px; justify-content: center; color:green; border-radius: 20px;">
+            style="display: flex; font-size: 80%;  align-items: center; justify-content: center;  border-radius: 20px;">
+            <ion-row><b>ENTRY FEES &#x20b9; {{league.entryFee}}</b></ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card style="border-radius: 30px;" *ngSwitchCase="league.size">
+      <ion-grid>
+        <ion-row>
+          <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
+          <ion-col style="display: flex; font-size: 12px; justify-content: center; color:green; border-radius: 20px;">
             <ion-row>
               <ion-col style="font-size:medium">WIN:</ion-col>
-              <ion-col style="font-size:medium"><b>&#x20b9;{{league.winningAmount}}</b></ion-col> 
+              <ion-col style="font-size:medium"><b>&#x20b9;{{league.winningAmount}}</b></ion-col>
             </ion-row>
           </ion-col>
         </ion-row>
         <ion-row>
-          <a (click)="presentModal(league.breakupId)"><ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
+          <ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
           <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
-          </a><ion-col></ion-col>
+          <ion-col></ion-col>
           <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOINED'">
-            <ion-button style="width: 60%;height: 80%;" color="secondary" routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">Joined
+            <ion-button style="width: 60%;height: 80%;" color="secondary"
+              routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">Joined
             </ion-button>
           </ion-col>
           <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOIN'">
-            <ion-button expand="block" style="width: 60%;height: 80%;" color="secondary" routerLink="/teamlist/{{uniqueNumber}}/{{matchId}}/{{league.id}}/2">Join
+            <ion-button expand="block" style="width: 60%;height: 80%;" color="secondary"
+              routerLink="/teamlist/{{uniqueNumber}}/{{matchId}}/{{league.id}}/2">Join
             </ion-button>
           </ion-col>
         </ion-row>
@@ -70,51 +197,12 @@
             </ion-row>
           </ion-col>
           <ion-col
-            style="display: flex; font-size: 80%;  align-items: center; justify-content: center;  border-radius: 20px;">
-            <ion-row><b>ENTRY FEES &#x20b9; {{league.entryFee}}</b></ion-row> 
+            style="display: flex; font-size: 80%; color:white; align-items: center; justify-content: center; background:rgb(88, 165, 25); border-radius: 20px;">
+            <ion-row>ENTRY FEES &#x20b9; {{league.entryFee}}</ion-row>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-card>
-    <ion-card style="border-radius: 30px;" *ngSwitchCase="league.size">
-        <ion-grid>
-          <ion-row>
-            <ion-col style="display: flex; justify-content: left;"><b><i>{{league.league}}</i></b></ion-col>
-            <ion-col
-              style="display: flex; font-size: 12px; justify-content: center; color:green; border-radius: 20px;">
-              <ion-row>
-                <ion-col style="font-size:medium">WIN:</ion-col>
-                <ion-col style="font-size:medium"><b>&#x20b9;{{league.winningAmount}}</b></ion-col> 
-              </ion-row>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col *ngIf="league.winners == 1" style="color:blue">Single Winner</ion-col>
-            <ion-col *ngIf="league.winners !== 1" style="color:blue">{{league.winners}} Winner's</ion-col>
-            <ion-col></ion-col>
-            <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOINED'">
-              <ion-button style="width: 60%;height: 80%;" color="secondary" routerLink="/joinedteams/{{uniqueNumber}}/{{matchId}}/{{league.id}}">Joined
-              </ion-button>
-            </ion-col>
-            <ion-col style="display: flex; font-size: 12px; justify-content: center;" *ngIf="joinedLeague == 'JOIN'">
-              <ion-button expand="block" style="width: 60%;height: 80%;" color="secondary" routerLink="/teamlist/{{uniqueNumber}}/{{matchId}}/{{league.id}}/2">Join
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col style="display: flex; align-items: center; font-size: 12px; justify-content: left;">
-              <ion-row>
-                <ion-col>SIZE</ion-col>
-                <ion-col>{{league.joinedTeam}}/{{league.size}}</ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col
-              style="display: flex; font-size: 80%; color:white; align-items: center; justify-content: center; background:rgb(88, 165, 25); border-radius: 20px;">
-              <ion-row>ENTRY FEES &#x20b9; {{league.entryFee}}</ion-row> 
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
+    </ion-card> -->
   </div>
 </ion-content>
 

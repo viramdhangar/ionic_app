@@ -1,42 +1,42 @@
 <ion-header>
-  <ion-toolbar color="light">
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/leagues/{{matchId}}"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-size: 80%; color:blue">{{match.team1Name}} vs
+    <ion-title style="font-size: 80%;">{{match.team1Name}} vs
         {{match.team2Name}}</ion-title>
   </ion-toolbar>
   <ion-toolbar color="light">
       <ion-title *ngIf="match.days !== 0"
         style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-        {{match.days}}d:{{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+        {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
       </ion-title>
       <ion-title *ngIf="match.days == 0"
         style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-        {{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+        {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
       </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-button color="secondary" expand="block" routerLink="/squad/{{matchId}}">Create Team</ion-button>
+  <ion-button color="tertiary" expand="block" routerLink="/squad/{{matchId}}">Create Team</ion-button>
   <ion-card style="border-radius: 20px;" *ngFor="let team of teams">
     <ion-grid>
       <ion-row>
-        <ion-col style="display: flex; align-items: center; justify-content: center">{{team.teamName}}</ion-col>
-        <ion-col style="display: flex; align-items: center; justify-content: center">
-          <ion-button style="width: 60%;height: 80%;" expand="block" color="secondary" routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{viewFlag}}">VIEW</ion-button>
+        <ion-col style="text-align: left; padding-top: 3%">{{team.teamName}}</ion-col>
+        <ion-col style="text-align: left; padding-top: 0%">
+          <ion-button size="small" color="tertiary" routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.id}}/111/{{viewFlag}}"><font size="1%">VIEW</font></ion-button>
         </ion-col>
-        <ion-col style="display: flex; align-items: center; justify-content: center">
-          <ion-button style="width: 60%;height: 80%;" expand="block" color="secondary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{editFlag}}">EDIT</ion-button>
+        <ion-col style="text-align: left; padding-top: 0%">
+          <ion-button size="small" color="tertiary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{editFlag}}"><font size="1%">EDIT</font></ion-button>
         </ion-col>
-        <ion-col style="display: flex; align-items: center; justify-content: center">
-          <ion-button style="width: 60%;height: 80%;" expand="block" color="secondary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{copyFlag}}">COPY</ion-button>
+        <ion-col style="text-align: left; padding-top: 0%">
+          <ion-button size="small" color="tertiary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{copyFlag}}"><font size="1%">COPY</font></ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

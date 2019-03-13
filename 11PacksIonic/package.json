@@ -28,6 +28,7 @@
     "@ionic/angular": "4.0.0-rc.1",
     "@ionic/storage": "^2.2.0",
     "cordova-android": "7.1.4",
+    "cordova-browser": "5.0.4",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-firebase": "git+https://github.com/jestcastro/cordova-plugin-firebase.git",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
@@ -87,7 +88,8 @@
       "cordova-sms-plugin": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

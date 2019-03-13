@@ -22,7 +22,6 @@ export class SwitchteamService {
   public LEAGUES_API = this.API + '/api/v1';
 
   switchTeam(team : any, leagueId: any, teamId: any) {
-    console.log(this.http.post(this.LEAGUES_API + '/switchTeam/'+leagueId+'/'+teamId, team, httpOptions));
     return this.http.post(this.LEAGUES_API + '/switchTeam/'+leagueId+'/'+teamId, team, httpOptions);
   }
 }

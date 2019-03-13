@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JoinedteamsService } from '../service/joinedteams.service';
 import { ImgName } from '../model/AppConstants';
@@ -9,26 +9,27 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   private matches: any;
   public EXTENTION = '.png';
   public IMG_PATH = '../../assets/images/bigbash/';
   matchess: any;
-  uniqueNumber: any;
-  user: any;
+  username: any;
 
   constructor(private storage: Storage, private joinedteamsService: JoinedteamsService, private route: ActivatedRoute){
     this.matchess = "UPCOMING";
-    this.uniqueNumber = "55555";
   }
 
   ngOnInit() {
+
+    this.username = +this.route.snapshot.paramMap.get('username');
+    console.log("username", this.username);
     this.ionViewDidLoad();
   }
 
   ionViewDidLoad() {
-    this.joinedteamsService.getJoinedMatches(this.uniqueNumber).subscribe(matches => {
+    this.joinedteamsService.getJoinedMatches(this.username).subscribe(matches => {
       this.matches = matches;
       for(let joinedMatchObj of this.matches){
         for(let img of ImgName){
@@ -45,18 +46,11 @@ export class Tab2Page {
         if(joinedMatchObj.match.team2Url == null){
           joinedMatchObj.match.team2Url = this.IMG_PATH + "default" + this.EXTENTION;
         }
-        this.startTimer(joinedMatchObj.match);
+        this.startTimer(joinedMatchObj);
       }
     })
   }
-  getCurrentUser(){
-    this.storage.get("user").then(res => {
-      console.log(res);
-      this.user = res;
-      this.uniqueNumber = res.uniqueNumber;
-      console.log(this.user);
-    });
-  }
+
   doRefresh(event) {
     this.ionViewDidLoad();
     event.target.complete();
@@ -77,7 +71,7 @@ export class Tab2Page {
 
   calculateRemainingTime(match: any) {
     this.currentDate = new Date();
-    this.futureDate = new Date(match.date);
+    this.futureDate = new Date(match.match.date);
     this.difference = this.futureDate.getTime() - this.currentDate.getTime();
     this.seconds = Math.floor(this.difference / 1000);
     this.minutes = Math.floor(this.seconds / 60);
@@ -88,12 +82,12 @@ export class Tab2Page {
     this.minutes %= 60;
     this.seconds %= 60;
 
-    match.days = this.days;
-    match.hours = this.hours;
-    match.minutes = this.minutes;
-    match.seconds = this.seconds;
+    match.match.days = this.days;
+    match.match.hours = this.hours;
+    match.match.minutes = this.minutes;
+    match.match.seconds = this.seconds;
     if(this.futureDate.getTime() < this.currentDate.getTime()){
-      match.liveFlag = true;
+      match.match.liveFlag = true;
     }
-  }
+  } 
 }

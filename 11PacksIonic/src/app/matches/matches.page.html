@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      <img src="../../assets/icon/logo.png">
+    <ion-title style="text-align:center; font-size:80%; color:blue">
+      <img src="../../assets/icon/logo.png"> Striker11
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -23,17 +23,17 @@
           <ion-row style="display: flex; align-items: center; justify-content: center ; font-size: 80%">{{match.type}}
           </ion-row>
           <ion-row style="display: flex; align-items: center; justify-content: center">
-            <ion-col style="display: flex; align-items: center; justify-content: center">
-              <b><i>{{match.team1Short}}</i></b> &nbsp; vs &nbsp;  <b><i>{{match.team2Short}}</i></b>
+            <ion-col style="display: flex; align-items: center; justify-content: center; font-size: 80%">
+              <b><i>{{match.formattedTeamName}}</i></b>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="match.days !== 0"
             style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
-            {{match.days}}d:{{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+            {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
           </ion-row>
           <ion-row *ngIf="match.days == 0"
             style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
-            {{match.hours!}}h:{{match.minutes}}m:{{match.seconds}}s
+            {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
           </ion-row>
         </ion-col>
         <ion-col style="display: flex; align-items: center; justify-content: center">
