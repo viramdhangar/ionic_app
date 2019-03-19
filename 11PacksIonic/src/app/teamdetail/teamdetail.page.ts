@@ -22,6 +22,7 @@ export class TeamdetailPage implements OnInit {
   team1Name: string="none";
   team2Name: string="none";
   teams: any;
+  username: any;
 
   constructor(private teamService: TeamService, public loadingController: LoadingController, private teamdetailService: TeamdetailService, private route: ActivatedRoute) { }
 
@@ -54,6 +55,7 @@ export class TeamdetailPage implements OnInit {
     await loading.present();
     this.teamdetailService.getTeamDetail(uniqueNumber, matchId, teamId).subscribe(teamDetail => {
       this.teamDetail = teamDetail.players;
+      this.username = teamDetail.uniqueNumber;
       this.teamName = teamDetail.teamName;
       console.log("team : ",teamDetail.players);
       for(let team of this.teamDetail){
@@ -85,6 +87,7 @@ export class TeamdetailPage implements OnInit {
         if(this.team1Name != team.playingTeamName){
           this.team2Name = team.playingTeamName;
         }
+        this.username = team.uniqueNumber;
       }
       loading.dismiss();
     })

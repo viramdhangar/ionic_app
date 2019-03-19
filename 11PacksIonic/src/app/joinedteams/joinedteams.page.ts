@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JoinedteamsService } from '../service/joinedteams.service';
 import { LeaguesService } from '../service/leagues.service';
+import { Storage } from '@ionic/storage';
+import { ModalController } from '@ionic/angular';
+import { WinningbreakupPage } from '../pages/winningbreakup/winningbreakup.page';
 
 @Component({
   selector: 'app-joinedteams',
@@ -18,8 +21,9 @@ export class JoinedteamsPage implements OnInit {
   matchId:any;
   uniqueNumber:number;
   matchStatus :string;
+  user: any;
 
-  constructor(private joinedteamsService: JoinedteamsService, private leaguesService: LeaguesService, private route: ActivatedRoute) {
+  constructor(private modalController: ModalController, private storage: Storage, private joinedteamsService: JoinedteamsService, private leaguesService: LeaguesService, private route: ActivatedRoute) {
     this.action = 1;
    }
 
@@ -28,6 +32,7 @@ export class JoinedteamsPage implements OnInit {
     this.uniqueNumber = +this.route.snapshot.paramMap.get('uniqueNumber');
     this.leagueId = +this.route.snapshot.paramMap.get('leagueId');
     this.matchStatus = this.route.snapshot.params['matchStatus'];
+    this.getCurrentUser();
     this.getJoinedLeagues(this.uniqueNumber, this.matchId);
     this.ionViewDidLoad(this.uniqueNumber, this.matchId, this.leagueId);
     
@@ -48,5 +53,20 @@ export class JoinedteamsPage implements OnInit {
         }
       }
     })
+  }
+
+  getCurrentUser(){
+    this.storage.get("user").then(res => {
+      if(res){
+        this.user = res;
+      }
+    })
+  }
+  async presentModal(breakupId: any) {
+    const modal = await this.modalController.create({
+      component: WinningbreakupPage,
+      componentProps: { value: breakupId }
+    });
+    return await modal.present();
   }
 }

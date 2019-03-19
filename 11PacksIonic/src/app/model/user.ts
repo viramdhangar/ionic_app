@@ -9,4 +9,5 @@ export class User {
   gender: String;
   dob: any
   state: any;
+  otp: any;
 }

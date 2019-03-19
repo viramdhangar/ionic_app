@@ -55,15 +55,7 @@ export class SwitchteamPage implements OnInit {
 
   switchTeam(){
     if(this.isSelected == true){
-      this.switchteamService.switchTeam(this.newTeamObj, this.leagueId, this.teamId).subscribe(successMsg => {
-        console.log("mesage : "+successMsg.toString);
-        this.successMsg = successMsg.toString;
-        if(this.matchStatus == 'JOINED'){
-          this.router.navigate(['/joinedteams', this.uniqueNumber, this.matchId, this.leagueId, this.matchStatus]);
-        }else if(this.matchStatus == 'UPCOMING'){
-          this.router.navigate(['/joined-teamsrank', this.uniqueNumber, this.matchId, this.leagueId, this.matchStatus]);
-        }
-      })
+      this.switchteamService.switchTeam(this.newTeamObj, this.leagueId, this.teamId, this.matchStatus, this.uniqueNumber, this.matchId);
     }else{
       this.toastErrorAlert("Nothing selected");
       return false;

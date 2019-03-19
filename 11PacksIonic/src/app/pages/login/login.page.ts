@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../model/user';
 import { AlertValidatorService } from '../../service/alert-validator.service';
 import { AuthenticationService } from '../../service/authentication.service';
-import { LoadingController } from '@ionic/angular'; 
+import { LoadingController, ToastController } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   successMsg: any;
   public user: User;
 
-  constructor(public loadingController: LoadingController, private authService: AuthenticationService, private loginService: LoginService, private route: ActivatedRoute, private router: Router, private alert: AlertValidatorService) {
+  constructor(private toastController: ToastController, public loadingController: LoadingController, private authService: AuthenticationService, private loginService: LoginService, private route: ActivatedRoute, private router: Router, private alert: AlertValidatorService) {
     this.user = new User();
    }
 
@@ -29,10 +29,10 @@ export class LoginPage implements OnInit {
 
   async logForm(form : User){
     if(typeof form.userName =='undefined'){
-      this.alert.validateAlert("Username can not empty");
+      this.toastError5000("Username can not empty");
       return false;
     } else if(typeof form.password =='undefined'){
-      this.alert.validateAlert("Password can not empty");
+      this.toastError5000("Password can not empty");
       return false;
     } else {
       const loading = await this.loadingController.create({
@@ -48,6 +48,10 @@ export class LoginPage implements OnInit {
     this.authService.login(form);
   }
 
+  forgotPassword(){
+    this.toastErrorAlert("Forgot password functionality under progress, for password change please write to us on striker11fantasy@gmail.com, will reset your password");
+  }
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Athenticating...',
@@ -58,5 +62,28 @@ export class LoginPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
 
     console.log('Loading dismissed!');
+  }
+  async toastErrorAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
+      closeButtonText: 'Done',
+      duration: 20000
+    });
+    return await toast.present();
+  }
+
+  async toastError5000(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
+      closeButtonText: 'Done',
+      duration: 5000
+    });
+    return await toast.present();
   }
 }

@@ -1,18 +1,24 @@
 <ion-header>
+  <ion-title>
+    <ion-row style="text-align:right"><img class="logo-pic" src="../../assets/images/logo.png">
+      <ion-label *ngIf="match.days !== 0"
+        style="display: flex; align-items: center; justify-content: center; font-size: 60%; color:green">
+        {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+      </ion-label>
+      <ion-label *ngIf="match.days == 0"
+        style="display: flex; align-items: center; justify-content: left; font-size: 60%; color:green">
+        {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+      </ion-label>
+    </ion-row>
+  </ion-title>
+</ion-header>
+<ion-header>
   <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-back-button routerLink="/tabs/tabs/matches"></ion-back-button>
     </ion-buttons>
     <ion-title style="font-size: 80%;">{{match.team1Name}} vs
       {{match.team2Name}}</ion-title>
-  </ion-toolbar>
-  <ion-toolbar color="grey">
-    <ion-title *ngIf="match.days !== 0" style="display: flex; align-items: left; justify-content: left; font-size: 80%; color:green">
-      {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
-    </ion-title>
-    <ion-title *ngIf="match.days == 0" style="display: flex; align-items: left; justify-content: left; font-size: 80%; color:green">
-      {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
-    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -66,7 +72,7 @@
             <font color="grey" size="1%">size</font><br />
             <b>{{league.joinedTeam}}/{{league.size}}</b>
           </ion-col>
-          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%; color: green">
+          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%; color: rgb(196, 23, 23)">
             <font color="grey" size="1%">Entry</font><br />
             <b>&#8377; {{league.entryFee}}</b>
           </ion-col>
@@ -107,7 +113,7 @@
             <font color="grey" size="1%">size</font><br />
             <b>{{league.joinedTeam}}/{{league.size}}</b>
           </ion-col>
-          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%; color: green">
+          <ion-col style="text-align:center; padding-top: 1%; font-size: 80%; color: rgb(196, 23, 23)">
             <font color="grey" size="1%">Entry</font><br />
             <b>&#8377; {{league.entryFee}}</b>
           </ion-col>
@@ -211,11 +217,17 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button expand="block" routerLink="/leagues/{{uniqueNumber}}/{{matchId}}/JOINED">Joined Leagues
+          <ion-button shape="round" size="small" expand="block" routerLink="/tabs/tabs/matches">Matches
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button expand="block" color="secondary" routerLink="/teamsOfMatch/{{uniqueNumber}}/{{matchId}}">My Teams
+          <ion-button shape="round" size="small" expand="block"
+            routerLink="/leagues/{{uniqueNumber}}/{{matchId}}/JOINED">My Groups
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button shape="round" size="small" expand="block" color="secondary"
+            routerLink="/teamsOfMatch/{{uniqueNumber}}/{{matchId}}">My Teams
           </ion-button>
         </ion-col>
       </ion-row>

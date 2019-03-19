@@ -6,6 +6,7 @@ import { map, filter, scan, catchError } from 'rxjs/operators';
 import { AlertValidatorService } from '../../service/alert-validator.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AuthenticationService } from '../../service/authentication.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,12 +24,13 @@ export class RegistrationService {
 
   message: any;
 
-  constructor(private http: HttpClient, private alert: AlertValidatorService, private router: Router, private toastController: ToastController) { }
+  constructor(private authService: AuthenticationService, private http: HttpClient, private alert: AlertValidatorService, private router: Router, private toastController: ToastController) { }
 
   public API = environment.host;
   public LEAGUES_API = this.API + '/identity';
 
   registration(user: any): Observable<any> {    
+    user.userName=user.uniqueNumber;
     return this.http.post(this.LEAGUES_API + '/registration/', user, httpOptions).pipe(
       map((message: any) => {
         this.message = message;
@@ -41,7 +43,8 @@ export class RegistrationService {
         if (err.status == 200) {
           console.log("User: ", this.message);
           this.toastAlert("Registration successfully");
-          this.router.navigate(['/login']);
+          //this.router.navigate(['/login']);
+          this.authService.login(user);
           return this.message;
         }
         if ((err.status == 400) || (err.status == 404)) {

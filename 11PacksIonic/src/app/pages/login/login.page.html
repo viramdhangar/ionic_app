@@ -11,26 +11,26 @@
 	<ion-row justify-content-center>
 		<ion-col align-self-center >
 			<div text-center>
-				<h4>Sports Funda</h4>
+				<h4>Striker11</h4>
       </div>
       <form #form="ngForm"  novalidate>
 			<div padding>
 				<ion-item>
-					<ion-input [(ngModel)]="user.userName" name="userName" type="text" placeholder="Username"></ion-input>
+					<ion-input [(ngModel)]="user.userName" name="userName" type="text" placeholder="Mobile Or Email"></ion-input>
 				</ion-item>
 
 				<ion-item>
 					<ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password"></ion-input>
 				</ion-item>
 			</div>
-      <p text-right ion-text color="secondary" tappable ><strong>Forgot Password?</strong></p>
+      <p text-right ion-text color="secondary" (click)="forgotPassword()" tappable ><strong>Forgot Password?</strong></p>
       <div padding>
         <ion-button (click)="logForm(user)" expand="block">Login</ion-button>
 
     
         <ion-button expand="block" color="secondary" routerLink="/register" routerDirection="forward">Register</ion-button>
         
-        <p text-center ion-text color="secondary">Or Sign in with:</p>
+<!--        <p text-center ion-text color="secondary">Or Sign in with:</p>
         <ion-grid>
           <ion-row>
             <ion-col col-4>
@@ -49,7 +49,7 @@
               </button>
             </ion-col>
           </ion-row>
-        </ion-grid>
+        </ion-grid>-->
       </div>
     </form>
 		</ion-col>

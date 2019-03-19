@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verify Mobile OTP</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center>
+        <div>
+        </div>
+        <form #form="ngForm" novalidate>
+          <ion-list>
+            <div padding>
+              <ion-item>
+                <ion-input [(ngModel)]="user.otp" name="otp" type="text" placeholder="Enter OTP"></ion-input>
+              </ion-item>
+            </div>
+            <ion-button (click)="verifyMobileOTP(user)" expand="block">Verify OTP</ion-button>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -67,7 +67,7 @@ export class LeaguesPage implements OnInit {
             league.progress += 1;
           else
             clearInterval(league.progress);
-        }, 50);
+        }, 5);
       }
       loading.dismiss();
     })
@@ -92,7 +92,7 @@ export class LeaguesPage implements OnInit {
             league.progress += 1;
           else
             clearInterval(league.progress);
-        }, 50);
+        }, 5);
       }
       console.log(this.leagues);
       loading.dismiss();

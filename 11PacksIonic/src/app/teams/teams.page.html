@@ -1,22 +1,28 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/leagues/{{matchId}}"></ion-back-button>
-    </ion-buttons>
-    <ion-title style="font-size: 80%;">{{match.team1Name}} vs
-        {{match.team2Name}}</ion-title>
-  </ion-toolbar>
-  <ion-toolbar color="light">
-      <ion-title *ngIf="match.days !== 0"
-        style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-        {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
-      </ion-title>
-      <ion-title *ngIf="match.days == 0"
-        style="display: flex; align-items: left; justify-content: left;color:green; font-size: 80%">
-        {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+    <ion-toolbar color="grey">
+      <ion-title>
+        <ion-row>
+          <ion-col style="text-align:left; justify-content: center"><img class="logo-pic"
+              src="../../assets/images/logo.png"></ion-col>
+          <ion-col *ngIf="match.days !== 0"
+            style="display: flex; align-items: center; justify-content: center; font-size: 60%; color:green">
+            {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+          </ion-col>
+          <ion-col *ngIf="match.days == 0"
+            style="display: flex; align-items: center; justify-content: left; font-size: 60%; color:green">
+            {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+          </ion-col>
+        </ion-row>
       </ion-title>
     </ion-toolbar>
-</ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+        <ion-back-button routerLink="/tabs/tabs/matches"></ion-back-button>
+      </ion-buttons>
+      <ion-title style="font-size: 80%;">{{match.team1Name}} vs
+        {{match.team2Name}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
   <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">

@@ -33,6 +33,12 @@ const routes: Routes = [
   { path: 'winningbreakup', loadChildren: './pages/winningbreakup/winningbreakup.module#WinningbreakupPageModule' },
   { path: 'progress-bar', loadChildren: './pages/progress-bar/progress-bar.module#ProgressBarPageModule' },
   { path: 'tabs1', loadChildren: './tabs1/tabs1.module#Tabs1PageModule' },
+  { path: 'contactus', loadChildren: './pages/contactus/contactus.module#ContactusPageModule' },
+  { path: 'aboutus', loadChildren: './pages/aboutus/aboutus.module#AboutusPageModule' },
+  { path: 'fantasypointsystem', loadChildren: './pages/fantasypointsystem/fantasypointsystem.module#FantasypointsystemPageModule' },
+  { path: 'registerotherdetail/:uniqueNumber', loadChildren: './pages/registerotherdetail/registerotherdetail.module#RegisterotherdetailPageModule' },
+  { path: 'pages', loadChildren: './pages/pages.module#PagesPageModule' },
+  { path: 'phoneotpverification/:uniqueNumber', loadChildren: './pages/phoneotpverification/phoneotpverification.module#PhoneotpverificationPageModule' },
  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
 ];
 @NgModule({

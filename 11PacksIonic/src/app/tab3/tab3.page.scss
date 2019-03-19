@@ -24,6 +24,13 @@ ion-button {
     font-weight: 300;
 }
 
+.logo-pic{
+    width:100px;
+    height:30px;
+    -webkit-border-radius: 30%;
+    border-radius: 30%;
+  }
+
 @media (min-width: 240px) and (max-width: 768px) {
     ion-grid {
         background: $white-color;
@@ -32,3 +39,12 @@ ion-button {
         border: none;
     }
 }
+
+ion-content{
+    --background: #fff url('../../assets/images/home.jpg') no-repeat center center / cover;
+    //--background: linear-gradient(to bottom, #9900cc 0%, #cc99ff 100%);
+  }
+
+  ion-card{
+    background: #fff;
+  }

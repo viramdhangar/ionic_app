@@ -3,7 +3,8 @@ import { User } from '../../model/user';
 import { RegistrationService } from './registration.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertValidatorService } from '../../service/alert-validator.service';
-/*import * as firebase from 'firebase';*/
+import { VerificationService } from '../verification/verification.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +17,10 @@ export class RegisterPage implements OnInit {
   regex: any;
   successMsg :any;
   verificationId:string ="";
-  code: string="";
+  smsOTP: any;
+  uniqueNumber: any;
 
-  constructor(private registrationService: RegistrationService, private alert: AlertValidatorService, private route: ActivatedRoute, private router: Router) {
+  constructor(private toastController: ToastController, private verificationService: VerificationService, private registrationService: RegistrationService, private alert: AlertValidatorService, private route: ActivatedRoute, private router: Router) {
     this.user = new User();
    }
 
@@ -27,27 +29,19 @@ export class RegisterPage implements OnInit {
 
   logForm(form : any){
     if(typeof form.uniqueNumber =='undefined'){
-      this.alert.validateAlert("Mobile number can not empty");
+      this.toastError("Mobile number can not empty");
       return false;
-    } else if(typeof form.email =='undefined'){
-      this.alert.validateAlert("email can not empty");
-      return false;
-    } else if(!this.isEmailValid(form.email)){
-      this.alert.validateAlert("Please enter valid email");
-      return false;
-    } else if(typeof form.password =='undefined'){
-      this.alert.validateAlert("password can not empty");
-      return false;
-    } else if(typeof form.firstName =='undefined'){
-      this.alert.validateAlert("first name can not empty");
-      return false;
-    } else{
-      this.registrationService.registration(form).subscribe(successMsg => {
-        this.successMsg = successMsg;
-        this.router.navigate(['/login']);
-        console.log("mesage : "+this.successMsg.status);
-      })
+    } else {
+      this.uniqueNumber = form.uniqueNumber;
+      this.verificationService.sendMobileOTP(form.uniqueNumber);
     }
+  }
+
+  verifyMobileOTP(user: any) {
+    if (user.otp == 'undefined') {
+      this.toastError("Please enter OTP");
+    }
+    this.verificationService.verifyMobileOTP(this.uniqueNumber, user.otp);
   }
 
   isEmailValid(email: any) {
@@ -55,24 +49,15 @@ export class RegisterPage implements OnInit {
     return this.regex.test(email);
   }
 
-  /*send(){
-    (<any>window).FirebasePlugin.verifyPhoneNumber("+918097547286", 60, (credential)=>{
-      console.log(credential);
-      this.verificationId = credential.verificationId;
-    }, (error)=>{
-      console.error(error);
-    })
-  }
-
-  verify(){
-    let signInCredential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, this.code);
-    firebase.auth().signInWithCredential(signInCredential).then((info)=>{
-      console.log(info);
-    }, (error)=>{
-      console.log(error);
+  async toastError(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
+      closeButtonText: 'Done',
+      duration: 2000
     });
-  }*/
-  sendEmailVerificationCode(email: any){
-
+    return await toast.present();
   }
 }

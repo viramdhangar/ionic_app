@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      My Account
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-title style="text-align:center; justify-content: center">
+        <ion-row><img class="logo-pic" src="../../assets/images/logo.png"></ion-row>     
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
   <ion-list>
@@ -18,7 +18,7 @@
         </ion-buttons>
       </ion-label>
     </ion-item>
-    <ion-item>
+    <!--<ion-item>
       <ion-label>
         <ion-buttons slot="start">
           <ion-button routerLink="/verification">
@@ -27,11 +27,11 @@
           </ion-button>
         </ion-buttons>
       </ion-label>
-    </ion-item>
+    </ion-item>-->
     <ion-item>
       <ion-label>
         <ion-buttons slot="start">
-          <ion-button (click)="fantasyPointSystem()">
+          <ion-button routerLink="/fantasypointsystem">
             <ion-icon slot="icon-only" name="stats"></ion-icon>&nbsp;
             Fantasy Point System
           </ion-button>
@@ -43,7 +43,7 @@
         <ion-buttons slot="start">
           <ion-button routerLink="/account/{{userName}}">
             <ion-icon slot="icon-only" name="wallet"></ion-icon>&nbsp;
-            Account
+            My Balance
           </ion-button>
         </ion-buttons>
       </ion-label>
@@ -67,20 +67,20 @@
         </ion-buttons>
       </ion-label>
     </ion-item>
-    <ion-item>
+  <!--  <ion-item>
       <ion-label>
         <ion-buttons slot="start">
           <ion-button routerLink="/refer">
-            <ion-icon slot="icon-only" name="construct"></ion-icon>&nbsp;T&C
+            <ion-icon slot="icon-only" name="construct" color="tertiary"></ion-icon>&nbsp;T&C
           </ion-button>
         </ion-buttons>
       </ion-label>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
       <ion-label>
         <ion-buttons slot="start">
-          <ion-button routerLink="/refer">
-            <ion-icon slot="icon-only" name="contact"></ion-icon>&nbsp;Contact Us
+          <ion-button routerLink="/contactus">
+            <ion-icon slot="icon-only" name="mail"></ion-icon>&nbsp;Contact Us
           </ion-button>
         </ion-buttons>
       </ion-label>

@@ -1,11 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>verification</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/tabs/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verification</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button expand="block" (click)="sendMobileVerificationCode()">Verify your phone number</ion-button>
-  <ion-input  type="text" placeholder="Enter OTP" [(ngModel)]="smsOTP"></ion-input>
-  <ion-button expand="block" (click)="verify()">Verify</ion-button>
+<ion-content padding>
+  <ion-button expand="block" (click)="sendMobileOTP()">Verify your phone number</ion-button>
+  <ion-input type="text" placeholder="Enter OTP" [(ngModel)]="smsOTP"></ion-input>
+  <ion-button expand="block" (click)="verifyMobileOTP()">Verify</ion-button>
 </ion-content>

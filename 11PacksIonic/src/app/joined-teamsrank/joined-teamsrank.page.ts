@@ -4,6 +4,9 @@ import { JoinedteamsrankService } from '../service/joinedteamsrank.service';
 import { LeaguesService } from '../service/leagues.service';
 import { JoinedteamsService } from '../service/joinedteams.service';
 import { MatchesService } from '../service/matches.service'
+import { Storage } from '@ionic/storage';
+import { ModalController } from '@ionic/angular';
+import { WinningbreakupPage } from '../pages/winningbreakup/winningbreakup.page';
 
 @Component({
   selector: 'app-joined-teamsrank',
@@ -21,14 +24,16 @@ export class JoinedTeamsrankPage implements OnInit {
   uniqueNumber:number;
   matchStatus :string;
   match: any;
+  user: any;
 
-  constructor(private  matchesService : MatchesService, private joinedteamsService: JoinedteamsService, private joinedteamsrankService: JoinedteamsrankService, private leaguesService: LeaguesService, private route: ActivatedRoute) { }
+  constructor(private modalController: ModalController, private storage: Storage, private  matchesService : MatchesService, private joinedteamsService: JoinedteamsService, private joinedteamsrankService: JoinedteamsrankService, private leaguesService: LeaguesService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.matchId = +this.route.snapshot.paramMap.get('matchId');
     this.uniqueNumber = +this.route.snapshot.paramMap.get('uniqueNumber');
     this.leagueId = +this.route.snapshot.paramMap.get('leagueId');
     this.matchStatus = this.route.snapshot.params['matchStatus'];
+    this.getCurrentUser();
     this.getMatch(this.matchId);
     this.getJoinedLeagues(this.uniqueNumber, this.matchId);
     this.ionViewDidLoad(this.uniqueNumber, this.matchId, this.leagueId);
@@ -55,7 +60,7 @@ export class JoinedTeamsrankPage implements OnInit {
               this.league.progress += 1;
             else
               clearInterval(this.league.progress);
-          }, 50);
+          }, 5);
         }
       }
     })
@@ -113,5 +118,20 @@ export class JoinedTeamsrankPage implements OnInit {
     this.interval = setInterval(() => {
       this.calculateRemainingTime(match);
     }, 1000)
+  }
+
+  getCurrentUser(){
+    this.storage.get("user").then(res => {
+      if(res){
+        this.user = res;
+      }
+    })
+  }
+  async presentModal(breakupId: any) {
+    const modal = await this.modalController.create({
+      component: WinningbreakupPage,
+      componentProps: { value: breakupId }
+    });
+    return await modal.present();
   }
 }

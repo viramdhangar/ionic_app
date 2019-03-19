@@ -14,7 +14,7 @@ import { SMS } from '@ionic-native/sms/ngx';
 import { StarplayerPageModule } from './pages/starplayer/starplayer.module';
 import { WinningbreakupPageModule } from './pages/winningbreakup/winningbreakup.module';
 
-/*import * as firebase from 'firebase';
+import * as firebase from 'firebase';
 
 firebase.initializeApp({
   apiKey: "AIzaSyBlfATRjXU3fA0Y9IFpMsyhUOhq1hNtbGs",
@@ -23,7 +23,7 @@ firebase.initializeApp({
   projectId: "riders-44f39",
   storageBucket: "riders-44f39.appspot.com",
   messagingSenderId: "928518408139"
-});*/
+});
 
 @NgModule({
   declarations: [AppComponent],

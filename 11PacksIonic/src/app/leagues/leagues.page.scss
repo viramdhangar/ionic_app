@@ -17,6 +17,14 @@
     border-radius: 10px;
     background-color: purple;
 }
+
+.logo-pic{
+  width:100px;
+  height:30px;
+  -webkit-border-radius: 30%;
+  border-radius: 30%;
+}
+
 .sk-rotating-plane {
     width: 40px;
     height: 40px;
@@ -46,3 +54,11 @@
     100% {
       -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
               transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+
+  ion-content{
+    --background: #fff url('../../assets/images/home.jpg') no-repeat center center / cover;
+    //--background: linear-gradient(to bottom, #9900cc 0%, #cc99ff 100%);
+}
+ion-card{
+  background: #fff;
+}

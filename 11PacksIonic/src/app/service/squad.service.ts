@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { map, filter, scan, catchError } from 'rxjs/operators';
 import { MatchTeam } from '../model/matchteam';
 import { environment } from '../../environments/environment';
 import { throwError, Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent, SubscriptionLike, PartialObserver } from 'rxjs';
-import { map, filter, scan, catchError } from 'rxjs/operators';
 import { AlertValidatorService } from '../service/alert-validator.service';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
@@ -68,12 +68,10 @@ export class SquadService {
           return this.message;
         }
         if ((err.status == 400) || (err.status == 417)) {
-          this.toastAlert(err.error.errorMessage);
-          console.log("status", err.status);
+          this.toastErrorAlert(err.error.errorMessage);
           loading.dismiss();
         } else {
-          this.toastAlert("Somthing is wrong...");
-          console.log("status", err.status);
+          this.toastErrorAlert("Somthing is wrong...");
           loading.dismiss();
           return throwError(err);
         }
@@ -91,6 +89,18 @@ export class SquadService {
       message: errorMessage,
       showCloseButton: true,
       position: 'top',
+      color: 'success',
+      closeButtonText: 'Done',
+      duration: 5000
+    });
+    return await toast.present();
+  }
+   async toastErrorAlert(errorMessage: any) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      showCloseButton: true,
+      position: 'top',
+      color: 'danger',
       closeButtonText: 'Done',
       duration: 5000
     });

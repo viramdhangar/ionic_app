@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title style="font-size: 80%;">Fantasy Point System</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/tabs/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-segment style="height: 6%;" [(ngModel)]="fantasyPoints">
+  <ion-segment-button value="T20">
+    <ion-label style="color: dark; font-size: 80%">T20</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="ODI">
+    <ion-label style="color: dark; font-size: 80%">ODI</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-content padding class="ion-content">
+  <ion-row style="font-size:75%; justify-content:center; color:white"><b>BATTING</b></ion-row>
+  <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
+    <div *ngSwitchCase="fantasyPoint.type">
+      <ion-list *ngIf="fantasyPoint.pointType == 'BATTING'">
+        <ion-row style="font-size:70%">
+          <ion-col text-wrap style="text-align: left">{{fantasyPoint.caption}}</ion-col>
+          <ion-col style="text-align: right">{{fantasyPoint.value}}</ion-col>
+        </ion-row>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-row style="font-size:75%; justify-content:center; color:white"><b>BOWLING</b></ion-row>
+  <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
+    <div *ngSwitchCase="fantasyPoint.type">
+      <ion-list *ngIf="fantasyPoint.pointType == 'BOWLING'">
+        <ion-row style="font-size:70%">
+          <ion-col text-wrap style="text-align: left">{{fantasyPoint.caption}}</ion-col>
+          <ion-col style="text-align: right">{{fantasyPoint.value}}</ion-col>
+        </ion-row>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-row style="font-size:75%; justify-content:center; color:white"><b>FIELDING</b></ion-row>
+  <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
+    <div *ngSwitchCase="fantasyPoint.type">
+      <ion-list *ngIf="fantasyPoint.pointType == 'FIELDING'">
+        <ion-row style="font-size:70%">
+          <ion-col text-wrap style="text-align: left">{{fantasyPoint.caption}}</ion-col>
+          <ion-col style="text-align: right">{{fantasyPoint.value}}</ion-col>
+        </ion-row>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-row style="font-size:75%; justify-content:center; color:white"><b>STRIKE RATE</b></ion-row>
+  <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
+    <div *ngSwitchCase="fantasyPoint.type">
+      <ion-list *ngIf="fantasyPoint.pointType == 'STRIKE RATE'">
+        <ion-row style="font-size:70%">
+          <ion-col text-wrap style="text-align: left">{{fantasyPoint.caption}}</ion-col>
+          <ion-col style="text-align: right">{{fantasyPoint.value}}</ion-col>
+        </ion-row>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-row style="font-size:75%; justify-content:center; color:white"><b>ECONOMY RATE</b></ion-row>
+  <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
+    <div *ngSwitchCase="fantasyPoint.type">
+      <ion-list *ngIf="fantasyPoint.pointType == 'ECONOMY RATE'">
+        <ion-row style="font-size:70%">
+          <ion-col text-wrap style="text-align: left">{{fantasyPoint.caption}}</ion-col>
+          <ion-col style="text-align: right">{{fantasyPoint.value}}</ion-col>
+        </ion-row>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-row style="font-size:75%; justify-content:center; color:white"><b>OTHERS</b></ion-row>
+  <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
+    <div *ngSwitchCase="fantasyPoint.type">
+      <ion-list *ngIf="fantasyPoint.pointType == 'OTHERS'">
+        <ion-row style="font-size:70%">
+          <ion-col text-wrap style="text-align: left">{{fantasyPoint.caption}}</ion-col>
+          <ion-col style="text-align: right">{{fantasyPoint.value}}</ion-col>
+        </ion-row>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-card>
+    <ul>
+      <li>more information</li>
+    </ul>
+  </ion-card>
+
+</ion-content>

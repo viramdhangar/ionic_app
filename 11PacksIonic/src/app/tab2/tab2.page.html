@@ -1,4 +1,9 @@
 <ion-header>
+  <ion-title style="text-align:center; justify-content: center">
+    <ion-row><img class="logo-pic" src="../../assets/images/logo.png"></ion-row>
+  </ion-title>
+</ion-header>
+<ion-header>
   <ion-toolbar color="tertiary">
     <ion-title>
       My Matches
@@ -33,7 +38,8 @@
             <img class="circle-pic" src="{{match.match.team1Url}}">
           </ion-col>
           <ion-col>
-            <ion-row style="display: flex; align-items: center; justify-content: center ; font-size: 80%">{{match.match.type}}
+            <ion-row style="display: flex; align-items: center; justify-content: center ; font-size: 80%">
+              {{match.match.type}}
             </ion-row>
             <ion-row style="display: flex; align-items: center; justify-content: center">
               <ion-col style="display: flex; align-items: center; justify-content: center">
@@ -45,9 +51,9 @@
               Live
             </ion-row>
             <ion-row *ngIf="match.match.liveFlag == true && match.matchStatus == 'COMPLETED'"
-            style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
-            Completed
-          </ion-row>
+              style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
+              Completed
+            </ion-row>
             <ion-row *ngIf="match.match.days !== 0 && match.match.liveFlag == false"
               style="display: flex; align-items: center; justify-content: center;color:green; font-size: 80%">
               {{match.match.days}}d {{match.match.hours!}}h {{match.match.minutes}}m {{match.match.seconds}}s

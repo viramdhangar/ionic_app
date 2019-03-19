@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-back-button routerLink="/tabs/tabs/tab3"></ion-back-button>
     </ion-buttons>
@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        Total Amount: {{account.amount}}
+        Total Winning: {{account.winning}}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -22,6 +22,11 @@
     <ion-row>
       <ion-col>
         Bonus Amount: {{account.bonusAmount}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Total Amount: {{account.amount}}
       </ion-col>
     </ion-row>
     <ion-row>

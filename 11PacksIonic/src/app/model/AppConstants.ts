@@ -26,4 +26,13 @@ export const ImgName: any = [
         "Strikers",
         "Sylhet",
         "UAE",
-        "Vikings"]
+        "Vikings",
+        "Mumbai",
+        "Chennai",
+        "Bangalore",
+        "Rajasthan",
+        "Hyderabad",
+        "Kolkata",
+        "Punjab",
+        "Delhi"
+]

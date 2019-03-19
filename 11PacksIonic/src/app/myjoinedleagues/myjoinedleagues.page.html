@@ -109,6 +109,16 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-  </ion-toolbar>
-  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-button routerLink="/tabs/tabs/matches"  style="text-align:center">
+          <ion-icon name="home"></ion-icon><br/><p  style="font-size: 10px">Matches</p>
+        </ion-button>
+        <ion-button routerLink="/tabs/tabs/tab2/{{uniqueNumber}}" style="text-align:center">
+          <ion-icon name="trophy"></ion-icon><br/><p style="font-size: 10px">Joined Matches</p>
+        </ion-button>
+        <ion-button routerLink="/tabs/tabs/tab3" style="text-align:center">
+          <ion-icon name="more"></ion-icon><br/><p style="font-size: 10px">More</p></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
