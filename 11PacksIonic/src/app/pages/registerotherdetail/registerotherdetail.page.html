@@ -1,41 +1,34 @@
-<ion-header>
-  <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-<ion-grid>
-  <ion-row justify-content-center>
-    <ion-col align-self-center>
-      <div>
-        <h4>Striker11</h4>
-      </div>
-      <form #form="ngForm"  novalidate>
-          <ion-list>
-      <div padding>
-        
-        <ion-item>
-          <ion-input [(ngModel)]="user.email" name="email" type="email" placeholder="Email" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="user.firstName" name="firstName" type="text" placeholder="First Name" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="user.referralCode" name="referralCode" type="text" placeholder="Referral Code (Optional)"></ion-input>
-        </ion-item>
-      </div>
-      <div padding>
-        <ion-button (click)="logForm(user)" expand="block">Save</ion-button>
-      </div>
+<ion-content padding>
+  <div padding text-center>
+    <ion-title style="color:chocolate">SIGN-UP</ion-title>
+  </div>
+  <ion-card style="border-radius: 20px">
+    <form #form="ngForm" novalidate>
+      <ion-list>
+        <div padding>
+
+          <ion-item>
+            <ion-input [(ngModel)]="user.email" name="email" type="email" placeholder="Email" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" required>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="user.firstName" name="firstName" type="text" placeholder="First Name" required>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="user.referralCode" name="referralCode" type="text"
+              placeholder="Referral Code (Optional)"></ion-input>
+          </ion-item>
+        </div>
+        <div padding>
+          <ion-button (click)="logForm(user)" expand="block" color="tertiary" size="small" shape="round">Save</ion-button>
+        </div>
       </ion-list>
-      </form>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+    </form>
+  </ion-card>
+  <ion-card padding style="border-radius: 20px; text-align:center">Already member? <b style="color:chocolate"
+      routerLink="/login">Sign In</b></ion-card>
 </ion-content>

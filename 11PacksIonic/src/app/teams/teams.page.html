@@ -1,30 +1,33 @@
 <ion-header>
-    <ion-toolbar color="grey">
-      <ion-title>
-        <ion-row>
-          <ion-col style="text-align:left; justify-content: center"><img class="logo-pic"
-              src="../../assets/images/logo.png"></ion-col>
-          <ion-col *ngIf="match.days !== 0"
-            style="display: flex; align-items: center; justify-content: center; font-size: 60%; color:green">
-            {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
-          </ion-col>
-          <ion-col *ngIf="match.days == 0"
-            style="display: flex; align-items: center; justify-content: left; font-size: 60%; color:green">
-            {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
-          </ion-col>
-        </ion-row>
-      </ion-title>
-    </ion-toolbar>
-    <ion-toolbar color="tertiary">
-      <ion-buttons slot="start">
-        <ion-back-button routerLink="/tabs/tabs/matches"></ion-back-button>
-      </ion-buttons>
-      <ion-title style="font-size: 80%;">{{match.team1Name}} vs
-        {{match.team2Name}}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-title>
+    <ion-row>
+      <ion-col style="text-align:left; justify-content: center"><img class="logo-pic"
+          src="../../assets/images/logo.png"></ion-col>
+    </ion-row>
+  </ion-title>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/tabs/tabs/matches"></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col>
+        <ion-title style="font-size: 80%;">{{match.formattedTeamName}}</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="match.days !== 0"
+          style="display: flex; align-items: right; justify-content: center; font-size: 60%; color:green">
+          {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+        </ion-label>
+        <ion-label *ngIf="match.days == 0"
+          style="display: flex; align-items: right; justify-content: left; font-size: 60%; color:green">
+          {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
       refreshingText="Refreshing...">
@@ -36,13 +39,22 @@
       <ion-row>
         <ion-col style="text-align: left; padding-top: 3%">{{team.teamName}}</ion-col>
         <ion-col style="text-align: left; padding-top: 0%">
-          <ion-button size="small" color="tertiary" routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.id}}/111/{{viewFlag}}"><font size="1%">VIEW</font></ion-button>
+          <ion-button size="small" color="tertiary"
+            routerLink="/teamView/{{uniqueNumber}}/{{matchId}}/{{team.id}}/111/{{viewFlag}}">
+            <font size="1%">VIEW</font>
+          </ion-button>
         </ion-col>
         <ion-col style="text-align: left; padding-top: 0%">
-          <ion-button size="small" color="tertiary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{editFlag}}"><font size="1%">EDIT</font></ion-button>
+          <ion-button size="small" color="tertiary"
+            routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{editFlag}}">
+            <font size="1%">EDIT</font>
+          </ion-button>
         </ion-col>
         <ion-col style="text-align: left; padding-top: 0%">
-          <ion-button size="small" color="tertiary" routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{copyFlag}}"><font size="1%">COPY</font></ion-button>
+          <ion-button size="small" color="tertiary"
+            routerLink="/teamEdit/{{uniqueNumber}}/{{matchId}}/{{team.id}}/{{copyFlag}}">
+            <font size="1%">COPY</font>
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -50,14 +62,14 @@
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" routerLink="/leagues/{{match.unique_id}}">All Groups
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-toolbar>
-    <ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" routerLink="/leagues/{{match.unique_id}}">All Groups
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+  <ion-footer>

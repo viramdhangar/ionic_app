@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthguardService } from './service/authguard.service';
 
 const routes: Routes = [
-  { path: '', loadChildren: './pages/home/home.module#HomePageModule', pathMatch:'full'},
+  { path: '', loadChildren: './pages/login/login.module#LoginPageModule', pathMatch:'full'},
  // { path: '', loadChildren: './pages/home/home.module#HomePageModule' },
   //{ path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },

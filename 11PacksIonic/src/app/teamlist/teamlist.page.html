@@ -1,10 +1,29 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-title>
+    <ion-row>
+      <ion-col style="text-align:left; justify-content: center"><img class="logo-pic"
+          src="../../assets/images/logo.png"></ion-col>
+    </ion-row>
+  </ion-title>
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/leagues/{{matchId}}"></ion-back-button>
+      <ion-back-button routerLink="/leagues/{{matchId}}"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-size: 80%;">{{match.team1Name}} vs
-      {{match.team2Name}}</ion-title>
+    <ion-row>
+      <ion-col>
+        <ion-title style="font-size: 80%;">{{match.formattedTeamName}}</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="match.days !== 0"
+          style="display: flex; align-items: right; justify-content: center; font-size: 60%; color:green">
+          {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+        </ion-label>
+        <ion-label *ngIf="match.days == 0"
+          style="display: flex; align-items: right; justify-content: left; font-size: 60%; color:green">
+          {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +35,8 @@
       </ion-list-header>
       <ion-item *ngFor="let team of teams">
         <ion-label>{{team.teamName}}</ion-label>
-        <ion-radio [value]="team.teamName" checked="team.checked" (click)="updateRadio(team)" checked="false"></ion-radio>
+        <ion-radio [value]="team.teamName" checked="team.checked" (click)="updateRadio(team)" checked="false">
+        </ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>

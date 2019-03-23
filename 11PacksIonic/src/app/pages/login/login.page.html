@@ -1,58 +1,22 @@
-<ion-header>
-  <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-<ion-grid>
-	<ion-row justify-content-center>
-		<ion-col align-self-center >
-			<div text-center>
-				<h4>Striker11</h4>
-      </div>
-      <form #form="ngForm"  novalidate>
-			<div padding>
-				<ion-item>
-					<ion-input [(ngModel)]="user.userName" name="userName" type="text" placeholder="Mobile Or Email"></ion-input>
-				</ion-item>
-
-				<ion-item>
-					<ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password"></ion-input>
-				</ion-item>
-			</div>
-      <p text-right ion-text color="secondary" (click)="forgotPassword()" tappable ><strong>Forgot Password?</strong></p>
+<ion-content padding>
+  <div padding text-center>
+    <ion-title style="color:chocolate">SIGN-IN</ion-title>
+  </div>
+  <ion-card style="border-radius: 20px">
+    <form #form="ngForm" novalidate>
       <div padding>
-        <ion-button (click)="logForm(user)" expand="block">Login</ion-button>
-
-    
-        <ion-button expand="block" color="secondary" routerLink="/register" routerDirection="forward">Register</ion-button>
-        
-<!--        <p text-center ion-text color="secondary">Or Sign in with:</p>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-4>
-              <button ion-button icon-only block class="btn-facebook">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </button>
-            </ion-col>
-            <ion-col col-4>
-              <button ion-button icon-only block class="btn-twitter">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </button>
-            </ion-col>
-            <ion-col col-4>
-              <button ion-button icon-only block class="btn-gplus">
-                <ion-icon name="logo-googleplus"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>-->
+        <ion-item>
+          <ion-input [(ngModel)]="user.userName" name="userName" type="text" placeholder="Mobile Or Email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password"></ion-input>
+        </ion-item>
+      </div>
+      <div padding>
+        <ion-button color="light" size="small" shape="round" expand="block" (click)="forgotPassword()">Forgot Password?</ion-button>
+        <ion-button (click)="logForm(user)" expand="block" color="tertiary" size="small" shape="round">Login</ion-button>
       </div>
     </form>
-		</ion-col>
-	</ion-row>
-</ion-grid>
+  </ion-card>
+  <ion-card padding style="border-radius: 20px; text-align:center">Not a member yet? <b style="color:chocolate" routerLink="/register">Sign Up</b></ion-card>
 </ion-content>

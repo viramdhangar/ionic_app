@@ -9,10 +9,28 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-input type="text" [(ngModel)]="account.depositedAmount" name="depositedAmount" placeholder="Enter amount to add"></ion-input>
+    <ion-input type="text" [(ngModel)]="account.depositedAmount" name="depositedAmount"
+      placeholder="Enter amount to add"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type="text"  [(ngModel)]="account.promotion" name="promotion" placeholder="Enter promotion code (Optional)"></ion-input>
+    <ion-input type="text" [(ngModel)]="account.promotion" name="promotion"
+      placeholder="Enter promotion code (Optional)"></ion-input>
   </ion-item>
   <ion-button expand="block" (click)="addBalance(account)">Add Balance</ion-button>
+  <ion-card padding style="border-radius: 30%;">
+    <ion-row>
+      <ion-col style="display: flex; align-items: center; justify-content: center">
+        <img class="logo-pic" src="../../../assets/images/payu_money.png" (click)="makePayment()" />
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card padding style="border-radius: 30%;">
+    <ion-row>
+      <ion-col style="display: flex; align-items: center; justify-content: center">
+        <img class="logo-pic" src="../../../assets/images/paytm.jpg" (click)="createTxnRequest(account)" />
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
 </ion-content>

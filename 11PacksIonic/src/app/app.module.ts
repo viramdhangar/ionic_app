@@ -13,7 +13,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
 import { StarplayerPageModule } from './pages/starplayer/starplayer.module';
 import { WinningbreakupPageModule } from './pages/winningbreakup/winningbreakup.module';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as firebase from 'firebase';
 
 firebase.initializeApp({
@@ -34,6 +34,7 @@ firebase.initializeApp({
     SplashScreen,
     SocialSharing,
     SMS,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -59,8 +59,8 @@
         <variable name="INDUSTRY_TYPE_ID" value="Retail" />
         <variable name="WEBSITE" value="APPSTAGING" />
     </plugin>
-    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
-    <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
     <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>

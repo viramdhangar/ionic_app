@@ -32,7 +32,7 @@ export class AppComponent {
         if (state) {
           this.router.navigate(['/tabs/tabs/matches']);
         } else {
-          this.router.navigate(['']);
+          this.router.navigate(['/login']);
         }
       })
     });

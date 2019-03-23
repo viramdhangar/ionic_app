@@ -76,3 +76,12 @@
     bottom: -1px;
     height: 50%;
   }
+
+  ion-content { 
+    //--background: url('../../../assets/images/app-images/home.jpg') no-repeat 50% 50%; width:50%; height: 50%;
+    --background:#f7ebf4;
+    }  
+
+   ion-card{
+     background: #fff;
+  }

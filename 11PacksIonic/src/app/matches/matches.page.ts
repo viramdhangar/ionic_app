@@ -23,15 +23,6 @@ export class MatchesPage {
   }
 
   ionViewDidLoad() {
-    console.log("fff", (<any>window));
-    if (!(<any>window).cordova) {
-      // Cordova Not Present
-      console.log("No cordova is not present");
-      return;
-  } else {  
-      // Proceed Forword
-      console.log("Yes cordova is present");
-  }
     this.matchesService.getMatches().subscribe(matches => {
       this.matches = matches;
       for (let match of this.matches) {

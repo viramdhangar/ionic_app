@@ -1,28 +1,19 @@
-<ion-header>
-  <ion-toolbar color="tertiary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>Verify Mobile OTP</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ion-grid>
-    <ion-row justify-content-center>
-      <ion-col align-self-center>
-        <div>
+<ion-content padding>
+  <div padding text-center>
+    <ion-title style="color:chocolate">SIGN-UP</ion-title>
+  </div>
+  <ion-card style="border-radius: 20px">
+    <form #form="ngForm" novalidate>
+      <ion-list>
+        <div padding>
+          <ion-item>
+            <ion-input [(ngModel)]="user.otp" name="otp" type="text" placeholder="Enter OTP"></ion-input>
+          </ion-item>
         </div>
-        <form #form="ngForm" novalidate>
-          <ion-list>
-            <div padding>
-              <ion-item>
-                <ion-input [(ngModel)]="user.otp" name="otp" type="text" placeholder="Enter OTP"></ion-input>
-              </ion-item>
-            </div>
-            <ion-button (click)="verifyMobileOTP(user)" expand="block">Verify OTP</ion-button>
-          </ion-list>
-        </form>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <ion-button (click)="verifyMobileOTP(user)" expand="block" color="tertiary" size="small" shape="round">Verify OTP</ion-button>
+      </ion-list>
+    </form>
+  </ion-card>
+  <ion-card padding style="border-radius: 20px; text-align:center">Already member? <b style="color:chocolate"
+      routerLink="/login">Sign In</b></ion-card>
 </ion-content>

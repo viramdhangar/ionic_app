@@ -1,24 +1,27 @@
 <ion-header>
   <ion-title>
     <ion-row style="text-align:right"><img class="logo-pic" src="../../assets/images/logo.png">
-      <ion-label *ngIf="match.days !== 0"
-        style="display: flex; align-items: center; justify-content: center; font-size: 60%; color:green">
-        {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
-      </ion-label>
-      <ion-label *ngIf="match.days == 0"
-        style="display: flex; align-items: center; justify-content: left; font-size: 60%; color:green">
-        {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
-      </ion-label>
     </ion-row>
   </ion-title>
-</ion-header>
-<ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button routerLink="/tabs/tabs/matches"></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-size: 80%;">{{match.team1Name}} vs
-      {{match.team2Name}}</ion-title>
+    <ion-row>
+      <ion-col>
+        <ion-title style="font-size: 80%;">{{match.formattedTeamName}}</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="match.days !== 0"
+          style="display: flex; align-items: right; justify-content: center; font-size: 60%; color:green">
+          {{match.days}}d {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+        </ion-label>
+        <ion-label *ngIf="match.days == 0"
+          style="display: flex; align-items: right; justify-content: left; font-size: 60%; color:green">
+          {{match.hours!}}h {{match.minutes}}m {{match.seconds}}s
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 

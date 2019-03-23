@@ -17,7 +17,7 @@
 </ion-segment>
 
 <ion-content padding class="ion-content">
-  <ion-row style="font-size:75%; justify-content:center; color:white"><b>BATTING</b></ion-row>
+  <ion-row style="font-size:75%; justify-content:center; color:black"><b>BATTING</b></ion-row>
   <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
     <div *ngSwitchCase="fantasyPoint.type">
       <ion-list *ngIf="fantasyPoint.pointType == 'BATTING'">
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <ion-row style="font-size:75%; justify-content:center; color:white"><b>BOWLING</b></ion-row>
+  <ion-row style="font-size:75%; justify-content:center; color:black"><b>BOWLING</b></ion-row>
   <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
     <div *ngSwitchCase="fantasyPoint.type">
       <ion-list *ngIf="fantasyPoint.pointType == 'BOWLING'">
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <ion-row style="font-size:75%; justify-content:center; color:white"><b>FIELDING</b></ion-row>
+  <ion-row style="font-size:75%; justify-content:center; color:black"><b>FIELDING</b></ion-row>
   <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
     <div *ngSwitchCase="fantasyPoint.type">
       <ion-list *ngIf="fantasyPoint.pointType == 'FIELDING'">
@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <ion-row style="font-size:75%; justify-content:center; color:white"><b>STRIKE RATE</b></ion-row>
+  <ion-row style="font-size:75%; justify-content:center; color:black"><b>STRIKE RATE</b></ion-row>
   <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
     <div *ngSwitchCase="fantasyPoint.type">
       <ion-list *ngIf="fantasyPoint.pointType == 'STRIKE RATE'">
@@ -65,7 +65,7 @@
     </div>
   </div>
 
-  <ion-row style="font-size:75%; justify-content:center; color:white"><b>ECONOMY RATE</b></ion-row>
+  <ion-row style="font-size:75%; justify-content:center; color:black"><b>ECONOMY RATE</b></ion-row>
   <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
     <div *ngSwitchCase="fantasyPoint.type">
       <ion-list *ngIf="fantasyPoint.pointType == 'ECONOMY RATE'">
@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  <ion-row style="font-size:75%; justify-content:center; color:white"><b>OTHERS</b></ion-row>
+  <ion-row style="font-size:75%; justify-content:center; color:black"><b>OTHERS</b></ion-row>
   <div [ngSwitch]="fantasyPoints" *ngFor="let fantasyPoint of fantasyPointsList">
     <div *ngSwitchCase="fantasyPoint.type">
       <ion-list *ngIf="fantasyPoint.pointType == 'OTHERS'">
