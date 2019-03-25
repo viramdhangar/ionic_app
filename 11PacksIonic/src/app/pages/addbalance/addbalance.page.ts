@@ -13,6 +13,7 @@ import { User } from '../../model/user';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import * as sha512 from 'js-sha512';
 import { ToastController } from '@ionic/angular';
+import { PayPal, PayPalPayment, PayPalConfiguration, PayPalPaymentDetails } from '@ionic-native/paypal/ngx';
 
 @Component({
   selector: 'app-addbalance',
@@ -27,7 +28,7 @@ export class AddbalancePage implements OnInit {
   resAccount: any;
   user: User;
 
-  constructor(private toast: ToastController , private iab: InAppBrowser, private matchesService: MatchesService, private storage: Storage, private addbalanceService: AddbalanceService, private alert: AlertValidatorService, private router: Router) {
+  constructor(private payPal: PayPal, private toast: ToastController , private iab: InAppBrowser, private matchesService: MatchesService, private storage: Storage, private addbalanceService: AddbalanceService, private alert: AlertValidatorService, private router: Router) {
     this.account = new Account();
   }
 
@@ -180,5 +181,32 @@ export class AddbalancePage implements OnInit {
     });
     return await toast.present();
   }
+  
+  payWithPayPal(){
+    this.payPal.init({
+      PayPalEnvironmentProduction: '',
+      PayPalEnvironmentSandbox: 'AQdVzrxTl3Qlar4z3BROVdKJXNh5rHnvpZt_AzQAS3Uzy1RA2jVZU62NaWSEh-vIoW7K1_bIb0pLAJ4u'
+    }).then(() =>{
+      this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        acceptCreditCards: false,
+        languageOrLocale: 'en',
+        merchantName: 'Viram Lal Dhangar',
+        merchantPrivacyPolicyURL: '',
+        merchantUserAgreementURL: ''
+      })).then(() =>{
+        let detail = new PayPalPaymentDetails('10.00', '0.00', '0.00');
+        let payment  = new PayPalPayment('10.00', 'INR', 'Description', 'sale', detail);
+        this.payPal.renderSinglePaymentUI(payment).then((response) =>{
+          console.log("paypal payment...");
+        }, () => {
+          console.log("error rendering...");
+        })
+      })
 
+    })
+  }
+  
+  payWithInstamojo(){
+
+  }
 }

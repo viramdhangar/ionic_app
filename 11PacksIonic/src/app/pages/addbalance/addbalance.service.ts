@@ -14,7 +14,7 @@ const httpOptions = {
 export class AddbalanceService {
 
   public API = environment.host;
-  public MATCHES_API = this.API + '/paytm';
+  public MATCHES_API = this.API + '/api/v1';
   txnRequest : any;
   constructor(public http : HttpClient) { }
 
@@ -28,7 +28,7 @@ export class AddbalanceService {
     this.txnRequest.MOBILE_NO = user.uniqueNumber;
     this.txnRequest.EMAIL = user.email;
     console.log("my detail", this.txnRequest);
-    return this.http.post(this.MATCHES_API+'/generate/checksum/', this.txnRequest, httpOptions);
+    return this.http.post('/paytm/generate/checksum/', this.txnRequest, httpOptions);
   }
   
 }

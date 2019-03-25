@@ -15,6 +15,7 @@ import { StarplayerPageModule } from './pages/starplayer/starplayer.module';
 import { WinningbreakupPageModule } from './pages/winningbreakup/winningbreakup.module';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as firebase from 'firebase';
+import { PayPal } from '@ionic-native/paypal/ngx';
 
 firebase.initializeApp({
   apiKey: "AIzaSyBlfATRjXU3fA0Y9IFpMsyhUOhq1hNtbGs",
@@ -35,6 +36,7 @@ firebase.initializeApp({
     SocialSharing,
     SMS,
     InAppBrowser,
+    PayPal,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

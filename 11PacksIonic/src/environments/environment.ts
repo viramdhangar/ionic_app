@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  host: "http://localhost:8080"
-  //host: "https://11packs.cfapps.io"
+  production: true,
+  //host: "http://localhost:8080"
+  host: "https://11packs.cfapps.io"
   //host: "http://ec2-13-233-224-40.ap-south-1.compute.amazonaws.com:8080"
 };
 
