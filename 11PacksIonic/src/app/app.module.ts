@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NewTransactionPage } from '../pages/instamojo/new_transaction'
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -16,6 +17,8 @@ import { WinningbreakupPageModule } from './pages/winningbreakup/winningbreakup.
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as firebase from 'firebase';
 import { PayPal } from '@ionic-native/paypal/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
+//import { AppVersion } from '@ionic-native/app-version/ngx';
 
 firebase.initializeApp({
   apiKey: "AIzaSyBlfATRjXU3fA0Y9IFpMsyhUOhq1hNtbGs",
@@ -28,15 +31,19 @@ firebase.initializeApp({
 
 @NgModule({
   declarations: [AppComponent],
+      //NewTransactionPage,
   entryComponents: [],
+      //NewTransactionPage,
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), StarplayerPageModule, WinningbreakupPageModule],
   providers: [
     StatusBar,
     SplashScreen,
     SocialSharing,
-    SMS,
     InAppBrowser,
+    NewTransactionPage,
     PayPal,
+    HTTP,
+    //AppVersion,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

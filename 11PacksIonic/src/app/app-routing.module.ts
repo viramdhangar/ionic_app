@@ -38,6 +38,7 @@ const routes: Routes = [
   { path: 'fantasypointsystem', loadChildren: './pages/fantasypointsystem/fantasypointsystem.module#FantasypointsystemPageModule' },
   { path: 'registerotherdetail/:uniqueNumber', loadChildren: './pages/registerotherdetail/registerotherdetail.module#RegisterotherdetailPageModule' },
   { path: 'pages', loadChildren: './pages/pages.module#PagesPageModule' },
+  { path: 'newTransaction', loadChildren: '../pages/instamojo/new_transaction.module#NewTransactionModule' },
   { path: 'phoneotpverification/:uniqueNumber', loadChildren: './pages/phoneotpverification/phoneotpverification.module#PhoneotpverificationPageModule' },
  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
 ];

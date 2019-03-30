@@ -1,4 +1,5 @@
 import { Component, OnInit, enableProdMode } from '@angular/core';
+//import { NewTransactionPage } from '../instamojo/new_transaction';
 import { AddbalanceService } from './addbalance.service';
 import { Account } from '../../model/account';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -12,7 +13,7 @@ import { TxnRequest } from '../../model/paytm';
 import { User } from '../../model/user';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import * as sha512 from 'js-sha512';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 import { PayPal, PayPalPayment, PayPalConfiguration, PayPalPaymentDetails } from '@ionic-native/paypal/ngx';
 
 @Component({
@@ -28,7 +29,7 @@ export class AddbalancePage implements OnInit {
   resAccount: any;
   user: User;
 
-  constructor(private payPal: PayPal, private toast: ToastController , private iab: InAppBrowser, private matchesService: MatchesService, private storage: Storage, private addbalanceService: AddbalanceService, private alert: AlertValidatorService, private router: Router) {
+  constructor(private navCtrl: NavController, private payPal: PayPal, private toast: ToastController , private iab: InAppBrowser, private matchesService: MatchesService, private storage: Storage, private addbalanceService: AddbalanceService, private alert: AlertValidatorService, private router: Router) {
     this.account = new Account();
   }
 
@@ -36,13 +37,20 @@ export class AddbalancePage implements OnInit {
     this.getCurrentUser();
   }
 
+  /*newTransaction() {
+    this.navCtrl.push(NewTransactionPage, {
+      amount: 10
+    });
+  }*/
   addBalance(account: any) {
     console.log("amount", account);
     account.username = this.user.userName;
     this.addbalanceService.addBalance(account).subscribe(response => {
-      this.resAccount = response;
-      this.router.navigate(['/account', this.user.userName, this.resAccount]);
-    })
+      if(response){
+        this.resAccount = response;
+        this.router.navigate(['/account', this.user.userName, this.resAccount]);
+      }
+    });
   }
 
   createTxnRequest(account: any) {
@@ -207,6 +215,6 @@ export class AddbalancePage implements OnInit {
   }
   
   payWithInstamojo(){
-
+    this.router.navigate(['/newTransaction']);
   }
 }

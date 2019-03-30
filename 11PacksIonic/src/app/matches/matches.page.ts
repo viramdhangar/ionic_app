@@ -70,6 +70,9 @@ export class MatchesPage {
     match.hours = this.hours;
     match.minutes = this.minutes;
     match.seconds = this.seconds;
+    if(match.seconds < 0 || match.minutes < 0){
+      this.doRefresh(event);
+    }
   }
   doRefresh(event) {
     this.ionViewDidLoad();
@@ -84,5 +87,6 @@ export class MatchesPage {
   pauseTimer() {
     clearInterval(this.interval);
   }
+
 
 }

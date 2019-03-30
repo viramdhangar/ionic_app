@@ -51,5 +51,7 @@ export class AuthenticationService {
       }
     })
   }
-
+  latestAppVersion(){
+    return this.loginService.latestAppVersion();
+  }
 }

@@ -24,6 +24,7 @@
     "@ionic-native/device": "^5.3.0",
     "@ionic-native/firebase": "^5.2.0",
     "@ionic-native/firebase-authentication": "^5.2.0",
+    "@ionic-native/http": "^5.3.0",
     "@ionic-native/in-app-browser": "^5.3.0",
     "@ionic-native/paypal": "^5.3.0",
     "@ionic-native/sms": "^5.1.0",
@@ -36,7 +37,9 @@
     "com.paypal.cordova.mobilesdk": "3.5.0",
     "cordova-android": "7.1.4",
     "cordova-browser": "5.0.4",
+    "cordova-plugin-advanced-http": "2.0.6",
     "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-file": "6.0.1",
     "cordova-plugin-firebase": "2.0.5",
     "cordova-plugin-firebase-authentication": "1.1.2",
     "cordova-plugin-inappbrowser": "3.0.0",
@@ -53,6 +56,7 @@
     "core-js": "^2.5.4",
     "es6-promise-plugin": "4.2.2",
     "firebase": "^5.8.2",
+    "instamojo-nodejs": "github:devsupport-ai/instamojo-nodejs",
     "ionic-select-searchable": "^2.10.0",
     "js-sha512": "^0.8.0",
     "ng4-date-countdown-timer": "^1.0.4",
@@ -109,7 +113,8 @@
         "WEBSITE": "APPSTAGING"
       },
       "cordova-plugin-inappbrowser": {},
-      "com.paypal.cordova.mobilesdk": {}
+      "com.paypal.cordova.mobilesdk": {},
+      "cordova-plugin-advanced-http": {}
     },
     "platforms": [
       "browser",

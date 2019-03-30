@@ -45,4 +45,8 @@ export class LoginService {
       })
     );
   }
+  latestAppVersion() : Observable<any>{
+    //return "1.0.0";
+    return this.http.get(this.LEAGUES_API + '/app/version');
+  }
 }

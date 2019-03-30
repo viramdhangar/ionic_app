@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size:80%; color:chocolate">
+      Deposite money
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-card padding>
+    <ion-input style="font-size:80%" type="text" [(ngModel)]="depositedAmount" name="depositedAmount"
+      placeholder="Enter amount"></ion-input>
+    <ion-input style="font-size:80%" type="text" [(ngModel)]="promotion" name="promotion"
+      placeholder="Enter promotion code (Optional)">
+    </ion-input>
+    <ion-button expand="block" size="medium" shape="round" (click)="payNow()">Pay Now</ion-button>
+    <p>{{processing}}</p>
+  </ion-card>
+</ion-content>

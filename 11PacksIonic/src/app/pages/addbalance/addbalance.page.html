@@ -1,9 +1,11 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Add Balance</ion-title>
+    <ion-title style="font-size:80% ;color:chocolate">
+      Pay with
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,33 +18,22 @@
     <ion-input type="text" [(ngModel)]="account.promotion" name="promotion"
       placeholder="Enter promotion code (Optional)"></ion-input>
   </ion-item>
-  <ion-button expand="block" (click)="addBalance(account)">Add Balance</ion-button>
-  <ion-card padding style="border-radius: 30%;">
-    <ion-row>
-      <ion-col style="display: flex; align-items: center; justify-content: center">
+  <ion-button expand="block"  size="medium" shape="round" (click)="addBalance(account)">Add Balance</ion-button>
+  
+    <!--  <ion-col style="display: flex; align-items: center; justify-content: center">
         <img class="logo-pic" src="../../../assets/images/payu_money.png" (click)="makePayment()" />
       </ion-col>
     </ion-row>
-  </ion-card>
 
-  <ion-card padding style="border-radius: 30%;">
     <ion-row>
       <ion-col style="display: flex; align-items: center; justify-content: center">
         <img class="logo-pic" src="../../../assets/images/paytm.jpg" (click)="createTxnRequest(account)" />
       </ion-col>
     </ion-row>
-  </ion-card>
-
-  <ion-card style="border-radius: 30%;">
+  
     <ion-row>
-      <ion-button expand="block" (click)="payWithPayPal()">PayPal</ion-button>
-    </ion-row>
-  </ion-card>
+      <ion-button expand="block"  size="medium" shape="round"  (click)="payWithPayPal()">PayPal</ion-button>
+    </ion-row>-->
 
-  <ion-card style="border-radius: 30%;">
-    <ion-row>
-      <ion-button expand="block" (click)="payWithInstamojo()">Pay With Instamojo</ion-button>
-    </ion-row>
-  </ion-card>
-
+  <ion-button expand="block" size="medium" shape="round" (click)="payWithInstamojo()">Pay With Instamojo</ion-button>
 </ion-content>
